@@ -1,0 +1,290 @@
+{"quizlist":[
+	{
+		"question":"Income Tax is charged in",
+		"option1":"Financial Year",
+		"option2":"Assessment Year",
+		"option3":"Previous Year",
+		"option4":"Accounting Year",
+		"correct" : "2",
+		"q_id" : "1",
+		"q_level" : "b",
+		"q_type" : "null"
+	},
+	{
+		"question":"The year in which the income is earned is known as",
+		"option1":"Previous Year",
+		"option2":"Financial Year",
+		"option3":"Both (A) or (B)",
+		"option4":"None of the above",
+		"correct" : "1",
+		"q_id" : "2",
+		"q_level" : "b",
+		"q_type" : "null"
+	},
+	{
+		"question":"Which among the following is not a head of Income?",
+		"option1":"Salaries",
+		"option2":"Income from house Property",
+		"option3":"Capital gains",
+		"option4":"Income from exports",
+		"correct" : "4",
+		"q_id" : "3",
+		"q_level" : "b",
+		"q_type" : "null"
+	},
+	{
+		 "question":"An investment is",
+		 "option1":"A contract between you and your bank for a checking account",
+		 "option2":"The outlay of funds for income or profit",
+		 "option3":"Only something that can be done through your 401K",
+		 "option4":"never a risk",
+		 "correct" : "2",
+		 "q_id" : "4",
+		 "q_level" : "b",
+		 "q_type" : "null"
+	},
+	{
+		"question":"The 'rate of return' is",
+		"option1":"The rate of how long you have to hold an investment",
+		"option2":"The rate that you have to pay to buy an investment",
+		"option3":"The percentage of increase or decrease expressed by percentage of the investment's cost",
+		"option4":"The interest rate earned",
+		"correct" : "3",
+		"q_id" : "5",
+		"q_level" : "b",
+		"q_type" : "null"
+	},
+	{
+		"question":"A single share of ownership of a legally formed company is called a:",
+		"option1":"Bond",
+		"option2":"Mutual Fund",
+		"option3":"Annuity",
+		"option4":"Stock",
+		"correct" : "4",
+		"q_id" : "6",
+		"q_level" : "b",
+		"q_type" : "null"
+	},
+	{
+		"question":"The savings bank account that does not operate for more than 24 months, then the account is called?",
+		"option1":"dormant account",
+		"option2":"demat account",
+		"option3":"inoperative account",
+		"option4":"inactive amount",
+		"correct" : "1",
+		"q_id" : "7",
+		"q_level" : "b",
+		"q_type" : "null"
+	},
+	{
+		"question":"If you had a short- term goal which interest would be best typically?",
+		"option1":"Simple",
+		"option2":"Compound",
+		"option3":"Both",
+		"option4":"Neither",
+		"correct" : "1",
+		"q_id" : "8",
+		"q_level" : "b",
+		"q_type" : "null"
+	},
+	{
+	"question":"Which of the following is an indirect tax?",
+	"option1":"Income tax",
+	"option2":"Wealth tax",
+	"option3":"Corporation tax",
+	"option4":"Sales tax",
+	"correct" : "4",
+	"q_id" : "9",
+	"q_level" : "i",
+	"q_type" : "null"
+	},
+	{
+	"question":"Which of the following tax was abolished by the Goods and Services Tax?",
+	"option1":"Property tax",
+	"option2":"Corporation tax",
+	"option3":"VAT",
+	"option4":"All of the above",
+	"correct" : "3",
+	"q_id" : "10",
+	"q_level" : "i",
+	"q_type" : "null"
+	},
+	{
+	"question":"Which of the following tax is imposed by the Central Government but the state government collects it?",
+	"option1":"VAT",
+	"option2":"Income tax",
+	"option3":"Corporation tax",
+	"option4":"Stamp duty",
+	"correct" : "4",
+	"q_id" : "11",
+	"q_level" : "i",
+	"q_type" : "null"
+	},
+	{
+		"question":"Withholding tax on capital gains may be applicable for",
+		"option1":"All investors",
+		"option2":"Only investors who are resident in India",
+		"option3":"Only investors who are non-resident in India",
+		"option4":"Short term gains only",
+		"correct" : "3",
+		"q_id" : "12",
+		"q_level" : "i",
+		"q_type" : "null"
+	},
+	{
+		"question":"SIP is the best example of",
+		"option1":"Rupee Cost Averaging",
+		"option2":"Value Averaging",
+		"option3":"Buy and Hold",
+		"option4":"All of the above",
+		"correct" : "1",
+		"q_id" : "13",
+		"q_level" : "i",
+		"q_type" : "null"
+	},
+	{
+		"question":"Mutual funds in India are permitted to invest in",
+		"option1":"Securities",
+		"option2":"Securities and Gold",
+		"option3":"Securities other than real estate",
+		"option4":"Securities, gold and real estate",
+		"correct" : "4",
+		"q_id" : "14",
+		"q_level" : "i",
+		"q_type" : "null"
+	},
+	{
+		"question":"When interest rates go up, the prices of fixed interest bonds",
+		"option1":"Go up",
+		"option2":"Go Down",
+		"option3":"Remain Unchanged",
+		"option4":"Neither",
+		"correct" : "2",
+		"q_id" : "15",
+		"q_level" : "i",
+		"q_type" : "null"
+	},
+	{
+		"question":"How long would it take to double your money in an account that paid 6% per year?",
+		"option1":"8 years",
+		"option2":"10 years",
+		"option3":"12 years",
+		"option4":"6 years",
+		"correct" : "3",
+		"q_id" : "16",
+		"q_level" : "i",
+		"q_type" : "null"
+	},
+	{
+		"question":"How can you track your deposits, withdrawal fees and interest payments?",
+		"option1":"monthly statement",
+		"option2":"online",
+		"option3":"both answers",
+		"option4":"Neither",
+		"correct" : "3",
+		"q_id" : "17",
+		"q_level" : "i",
+		"q_type" : "null"
+	},
+	{
+		"question":"If you put 200 rupees in a savings account that paid 5.5% simple interest each year, how much interest would you earn in five years?",
+		"option1":"200 rupees",
+		"option2":"5 rupees",
+		"option3":"55 rupees",
+		"option4":"77 rupees",
+		"correct" : "3",
+		"q_id" : "18",
+		"q_level" : "i",
+		"q_type" : "null"
+	},
+	{
+	"question":"You didn’t submit proof so your employer cuts your tax. Now you can",
+	"option1":"No longer claim the deduction if it does not figure in your Form 16",
+	"option2":"Claim the deduction later but won’t be eligible for tax refund",
+	"option3":"Claim the deduction at the time of filing your return and get a refund",
+	"option4":"None of the above",
+	"correct" : "3",
+	"q_id" : "19",
+	"q_level" : "e",
+	"q_type" : "null"
+	},
+	{
+	"question":"Which of these can’t be claimed as a deduction by individual taxpayers?",
+	"option1":"Accidental death and disability insurance",
+	"option2":"Health insurance of self and family",
+	"option3":"Preventive health check-ups of self and family",
+	"option4":"None of the above",
+	"correct" : "1",
+	"q_id" : "20",
+	"q_level" : "e",
+	"q_type" : "null"
+	},
+	{
+	"question":"There is no need to file your income tax return if...",
+	"option1":"TDS has been deducted and all taxes have been duly paid",
+	"option2":"Tax-saving investments have reduced your tax to zero",
+	"option3":"Your taxable income is below the basic exemption of Rs 2.5 lakh a year",
+	"option4":"None of the above",
+	"correct" : "2",
+	"q_id" : "21",
+	"q_level" : "e",
+	"q_type" : "null"
+	},
+	{
+	"question":"An NRI holds units in a MF. What should he do if he takes up a foreign citizenship?",
+	"option1":"Redeems",
+	"option2":"Continues",
+	"option3":"Transfers units to his mother, who resides in INDIA",
+	"option4":"None of the above",
+	"correct" : "2",
+	"q_id" : "22",
+	"q_level" : "e",
+	"q_type" : "null"
+	},
+	{
+	"question":"Which of the following risks do not affect a debt fund?",
+	"option1":"default by issuer on payment of interest or principal",
+	"option2":"price fluctuations of the debt securities",
+	"option3":"share price movements",
+	"option4":"interest volatility",
+	"correct" : "3",
+	"q_id" : "23",
+	"q_level" : "e",
+	"q_type" : "null"
+	},
+	{
+	"question":"What type of portfolio asset mix would you choose when you are 55 years old and planning to retire at the age of 58?",
+	"option1":"40% in equity schemes 60% in debt",
+	"option2":"40% in equity 60% in balanced",
+	"option3":"20% in equity 20% in liquid 60% in debt",
+	"option4":"100% in monthly income schemes",
+	"correct" : "1",
+	"q_id" : "24",
+	"q_level" : "e",
+	"q_type" : "null"
+	},
+	{
+	"question":"If you had a short- term goal which interest would be best typically",
+	"option1":"40% in equity schemes 60% in debt",
+	"option2":"40% in equity 60% in balanced",
+	"option3":"20% in equity 20% in liquid 60% in debt",
+	"option4":"100% in monthly income schemes",
+	"correct" : "1",
+	"q_id" : "25",
+	"q_level" : "e",
+	"q_type" : "null"
+	},
+	{
+	"question":"You have a savings account with an average balance of 500 rupees, which bank has the better deal?",
+	"option1":"Bank A with 10% annual interest rate and 5 rupees/month in fees",
+	"option2":"Bank B with 2% annual interest rate and no fees",
+	"option3":"They are the same",
+	"option4":"Neither",
+	"correct" : "2",
+	"q_id" : "26",
+	"q_level" : "e",
+	"q_type" : "null"
+	}
+ ]
+ }
+ 
