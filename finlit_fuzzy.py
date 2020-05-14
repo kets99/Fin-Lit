@@ -92,7 +92,7 @@ kind of task at which fuzzy logic excels.
 rule1 = ctrl.Rule(previous['good'] & current_level['expert'], next_level['expert'])
 rule2 = ctrl.Rule(previous['average'], next_level['intermediate'])
 rule3 = ctrl.Rule(previous['poor'] & current_level['beginner'], next_level['beginner'])
-rule4 = ctrl.Rule(previous['poor'] & current_level['intermediate'], next_level['intermediate'])
+rule4 = ctrl.Rule(previous['poor'] & current_level['intermediate'], next_level['beginner'])
 rule5 = ctrl.Rule(previous['poor'] & current_level['expert'], next_level['intermediate'])
 rule6 = ctrl.Rule(previous['good'] & current_level['intermediate'], next_level['expert'])
 rule7 = ctrl.Rule(previous['good'] & current_level['beginner'], next_level['intermediate'])
