@@ -407,7 +407,7 @@
 	},
 	{
 		"question" : "If you put 150 rupees in a savings account that paid 6% compounded yearly, how much money would you have earned in five years?",
-		"hint" : "Formula: A = P(1+r/n)nt , where A → Amount of money accumulated including the compound interest, P → Principal Amount, r → Rate of Interest per year in decimal, n → number of times the interest is compounded per year and  t→ Time period in years",
+		"hint" : "Formula: A = P(1+r/n)^(nt) , where A → Amount of money accumulated including the compound interest, P → Principal Amount, r → Rate of Interest per year in decimal, n → number of times the interest is compounded per year and  t → Time period in years",
 		"option1" : "159 rupees",
 		"option2" : "178.65 rupees",
 		"option3" : "189.37 rupees",
@@ -417,7 +417,7 @@
 		"q_level" : "i",
 		"q_domain" : "Banking",
 		"q_subdomain" : null,
-		"explanation" : "We have the Principal Amount here as 150 rupees, the Rate of Interest in decimal would be 6/100 = 0.06 and the Time period has been given as 5 years. It is also mentioned that the interest is compounded yearly, hence n = 1 (once a year). Hence, A = P(1+r/n)nt = 150(1+0.06/1)1*5 = 200.73 rupees."
+		"explanation" : "We have the Principal Amount here as 150 rupees, the Rate of Interest in decimal would be 6/100 = 0.06 and the Time period has been given as 5 years. It is also mentioned that the interest is compounded yearly, hence n = 1 (once a year). Hence, A = P(1+r/n)^(nt) = 150(1+0.06/1)^(1*5) = 200.73 rupees."
 	},
 	{
 		"question" : "What does 'E or S' mean?",
