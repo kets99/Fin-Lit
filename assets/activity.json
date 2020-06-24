@@ -479,7 +479,7 @@
 		"question" : "An overdraft is",
 		"hint" : null,
 		"option1" : "A piece of document that needs to be submitted to the bank at the time of opening a current account",
-		"option2" : "An agreement made with a bank that allows a current account holder to withdraw more money than what they have in their account up to the approved limit.",
+		"option2" : "An agreement made with a bank that allows a current account holder to withdraw more money than what they have in their account up to the approved limit",
 		"option3" : "A money draft that has been overdue",
 		"option4" : "None of the above",
 		"correct" : "2",
