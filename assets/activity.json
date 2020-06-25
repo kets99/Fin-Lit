@@ -879,7 +879,7 @@
 		"q_level" : "i",
 		"q_domain" : "Tax",
 		"q_subdomain" : null,
-		"explanation" : "TDS or Tax Deducted at Source is income tax deducted from the money paid at the time of making specified payments such as professional fees, salary, interest etc. by the persons making such payments. Usually, the person receiving income is liable to pay income tax. But the government with the help of Tax Deducted at Source provisions makes sure that income tax is deducted in advance. Hence, in simple words, TDS is what your company will deduct from your salary as tax in advance before paying you. This TDS is what your company will pay the government on your behalf."
+		"explanation" : "TDS or Tax Deducted at Source is income tax deducted from the money paid at the time of making specified payments such as professional fees, salary, interest etc. by the persons making such payments. Usually, the person receiving income is liable to pay income tax. But the government with the help of Tax Deducted at Source provisions makes sure that income tax is deducted in advance. Hence, in simple words, TDS is what your company will deduct from your salary as tax in advance before paying you. This TDS is what your company will pay the government on your behalf. Another example of TDS is banks deducting tax from the interest earned on your deposits (FDs, RDs)."
 	},
 	{
 		"question" : "Advance tax is",
