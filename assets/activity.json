@@ -630,7 +630,7 @@
 		"explanation" : "UPI or Unified Payment Interface is the most common and trendiest of money transfer methods out there! Apart from the prerequisites that we saw, it is required to create a 4-digit UPI pin on your UPI app and also provide details of your debit card. Unlike IMPS, you compulsorily need your bank account here, because that is what is linked to UPI for payments. For example, it is not PayTM that would be linked to UPI, it would be your bank account that would be linked to UPI, you would only need PayTM as a mobile app for facilitating the process."
 	},
 	{
-		"question" : "A financial year starts from and ends on:",
+		"question" : "A financial year starts from and ends on",
 		"hint" : null,
 		"option1" : "1st January - 31st December",
 		"option2" : "31st March - 30th March",
@@ -672,7 +672,7 @@
 		"explanation" : "Income is earned in the financial year or previous year. Both of these terms mean the same. Assessment Year is the year that immediately follows the financial year wherein you actually pay your taxes."
 	},
 	{
-		"question" : "Taxes are classified into two major types:",
+		"question" : "Taxes are classified into two major types",
 		"hint" : null,
 		"option1" : "Primary and Secondary",
 		"option2" : "Direct and Indirect",
@@ -837,7 +837,7 @@
 		"q_level" : "b",
 		"q_domain" : "Tax",
 		"q_subdomain" : null,
-		"explanation" : "Total Tax is basically GTI minus deductions. Deductions could mean money used for investments such as a life insurance, health insurance, a PPF, etc. or money earned as royalty. Once all the relevant deductions are claimed, from the GTI, the amount left is the Total Income or TI which is used to calculate your tax."
+		"explanation" : "Total Income is basically GTI minus deductions. Deductions could mean money used for investments such as a life insurance, health insurance, a PPF, etc. or money earned as royalty. Once all the relevant deductions are claimed, from the GTI, the amount left is the Total Income or TI which is used to calculate your tax."
 	},
 	{
 		"question" : "As of FY 2019-20, wealth tax",
