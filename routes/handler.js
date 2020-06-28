@@ -6,32 +6,33 @@ var spawn = require("child_process").spawn;
 var path = require('path');
 //var queries = require(path.join(__dirname,'../model/queries'));
 // const mime = require('mime');
-//var multer = require('multer');
 var request = require('request');
 //var query = require('.././model/queries');
 
+
+//Landing Page
 router.get('/',(req,res)=>{
-    console.log("here?");
-   res.render('packages',{layout : 'packages.handlebars'});
-
+   res.render('landing',{layout : 'landing.handlebars'});
 });
 
-router.get('/basics',(req,res)=>{
-    console.log("here?");
-   res.render('basics',{layout : 'basics.handlebars'});
-
+//First Quiz
+router.get('/first_quiz',(req,res)=>{
+    res.render('first_quiz',{layout : 'first_quiz.handlebars'});
 });
 
-router.get('/banks',(req,res)=>{
-    console.log("here?");
-   res.render('banks',{layout : 'banks.handlebars'});
-
+//Dashboard
+router.get('/dashboard',(req,res)=>{
+    res.render('dashboard',{layout : 'dashboard.handlebars'});
 });
 
-router.get('/loans',(req,res)=>{
-    console.log("here?");
-   res.render('loans',{layout : 'loans.handlebars'});
+//Banking Quiz
+router.get('/banking',(req,res)=>{
+    res.render('second_quiz',{layout : 'second_quiz.handlebars'});
+});
 
+//Tax Quiz
+router.get('/tax',(req,res)=>{
+    res.render('second_quiz',{layout : 'second_quiz.handlebars'});
 });
 
 
@@ -39,16 +40,11 @@ router.get('/loans',(req,res)=>{
 // url is of the form localhost:3000/name 
 router.get('/ip',(req,res)=>{
 
-    // Use child_process.spawn method from  
-    // child_process module and assign it 
-    // to variable spawn       
-    // Parameters passed in spawn - 
-    // 1. type_of_script 
-    // 2. list containing Path of the script 
-    //    and arguments for the script  
-      
-    // E.g : http://localhost:3000/ip?q1=1&q2=1&q3=1&q4=1&q5=1&q6=1&q7=1&q8=1&q9=1 
-    // so, first name = Mike and last name = Will 
+    // Use child_process.spawn method from child_process module and assign it to variable spawn       
+    // Parameters passed in spawn: 
+    // 1. type of script 
+    // 2. list containing path of the script and arguments for the script  
+    
     var process = spawn('python',["./user_class.py", 
                             req.query.q1, 
                             req.query.q2,
@@ -75,62 +71,11 @@ router.get('/fuzzy',(req,res) => {
     var process = spawn('python',["./finlit_fuzzy.py", 
                             req.query.score, 
                             req.query.cl] );
-  
-    // Takes stdout data from script which executed 
-    // with arguments and send this data to res object 
+
     process.stdout.on('data', function(data) { 
         console.log(data.toString());
         res.send(data);
     }) 
 });
-
-
-router.get('/updateusercat',(req,res)=>{
-
-    console.log("hi");
-    var obj = {
-        table: []
-     };
-    var fs = require('fs');
-    console.log('req.body');
-    console.log(req.query.uc);
-    var uc = req.query.uc;
-    console.log('working1')
-    console.log(obj)
-    u_c = JSON.stringify(uc);
-    obj.table.push({id: 9, category : u_c}); //add some data
-    console.log('working2')
-    console.log(obj)
-
-    fs.readFile('myjsonfile.json', 'utf8', function readFileCallback(err, data){
-        if (err){
-            console.log(err);
-        } else {
-        obj.table.push({id: 9, category : uc}); //add some data
-        json = JSON.stringify(obj); //convert it back to json
-        fs.writeFile('myjsonfile.json', json, 'utf8', function(err, data) {
-   
-            // Write the data read from readeMe.txt
-            // to a file writeMe.txt
-            if( !err )
-                fs.writeFile('myjsonfile.json', json, (err)=>{
-                    if( err ) {
-                        throw err;
-                    }
-                });
-            else
-                throw err;
-        }); // write it back
-    }});
-
-    process.stdout.on('data', function(data) { 
-        console.log(data+'');
-        res.send(data);
-    } ) 
-  
-});
-  
-// save code as start.js 
-
 
 module.exports=router;
