@@ -91,7 +91,7 @@ var oauth2 = new OAuth2("2684637981771820",
                   "https://graph.facebook.com/oauth/access_token",
                   null);
  router.get('/facebook/auth',function (req, res) {
-     var redirect_uri = "https://fin-lit2020.herokuapp.com/facebook/callback";
+     var redirect_uri = "https://fin-lit2020.herokuapp.com/dashboard/facebook/callback";
      // For eg. "http://localhost:3000/facebook/callback"
      var params = {'redirect_uri': redirect_uri, 'scope':'publish_pages, manage_pages'};
      res.redirect(oauth2.getAuthorizeUrl(params));
@@ -104,7 +104,7 @@ router.get('/facebook/callback', function (req, res) {
  
    if (req.query.code) {
     var loginCode = req.query.code;
-    var redirect_uri = "https://fin-lit2020.herokuapp.com/facebook/callback";
+    var redirect_uri = "https://fin-lit2020.herokuapp.com/dashboard/facebook/callback";
    // For eg. "/facebook/callback"
  
  
