@@ -36,6 +36,14 @@ router.get('/tax',(req,res)=>{
 });
 
 
+//handler for facebook
+router.get('/basics',(req,res)=>{
+    console.log("here?");
+   res.render('basics',{layout : 'basics.handlebars'});
+
+});
+
+
 // Function callName() is executed whenever  
 // url is of the form localhost:3000/name 
 router.get('/ip',(req,res)=>{
