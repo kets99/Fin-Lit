@@ -13,11 +13,6 @@ $(document).ready(function () {
 	
 	var questionNosSecond = [];		//Stores all question numbers as they are fetched from the JSON file
 
-	var cookie_arr = document.cookie.split("expires=");
-	var current_level = (cookie_arr[0].split("="))[1];
-	console.log("Cookie retrieved");
-	console.log(current_level);
-
 	var cl;		//0 for beginner, 1 for intermediate and 2 for expert: required for fuzzy
 
 	//question bank[i][5] will store the id of the correct answer 
@@ -26,7 +21,58 @@ $(document).ready(function () {
 	var overall_score = 0;
 
 	var timer_clock = 30;
-		
+
+	var current_section;
+
+	//To fetch proper question numbers
+	var sbeg, ebeg, sint, eint, sep, eep;
+
+	//Fetch what section (domain) the user wants to attempt
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+		  current_section = this.responseText;
+
+			var topbar = document.getElementById('topbar');
+			if(current_section==="banking") {
+				topbar.innerHTML = "Banking";
+				sbeg = 1;
+				ebeg = 15;
+				sint = 16;
+				eint = 30;
+				sep = 31;
+				eep = 45;
+
+				var cookie_arr = document.cookie.split("expires=");
+				var current_level = (cookie_arr[0].split("="))[1];
+				console.log("Cookie retrieved");
+				console.log(current_level);
+			}
+			else if(current_section==="tax") {
+				topbar.innerHTML = "Tax";
+				sbeg = 46;
+				ebeg = 60;
+				sint = 61;
+				eint = 75;
+				sep = 76;
+				eep = 90;
+			}
+			else if(current_section==="investments") {
+				topbar.innerHTML = "Investments";
+				sbeg = 91;
+				ebeg = 105;
+				sint = 106;
+				eint = 120;
+				sep = 121;
+				eep = 135;
+			}
+
+			generate_secondquiz();
+		}
+	};
+	xhttp.open("GET","/findSection", true);
+	xhttp.send();
+
 	//For displaying each question
 	function displayQuestion() {
 
@@ -188,12 +234,10 @@ $(document).ready(function () {
 	}
 
 	//Deciding the first four questions
-	generate_bankingquiz = function(length) {
+	generate_secondquiz = function(length) {
 		var nbeg = 0, nint = 0 , nexp = 0;		//Not being actually used, just to set number of questions from each section at first
 		var n;
 
-		var topbar = document.getElementById('topbar');
-		topbar.innerHTML = "Banking Quiz";
 		var timer = document.getElementById('timer');
 		timer.innerHTML = "Timer: " + timer_clock + " seconds";
 		
@@ -201,13 +245,13 @@ $(document).ready(function () {
 			nbeg = 2;	nint = 2;
 			for(i=0; i<2; i++) {
 				do
-					n = Math.floor(Math.random() * (15 - 1 + 1)) + 1;
+					n = Math.floor(Math.random() * (ebeg - sbeg + 1)) + sbeg;
 				while(questionNosSecond.indexOf(n) !== -1)
 				questionNosSecond[i] = n;
 			}
 			for(i=2; i<4; i++) {
 				do
-					n = Math.floor(Math.random() * (30 - 16 + 1)) + 16;
+					n = Math.floor(Math.random() * (eint - sint + 1)) + sint;
 				while(questionNosSecond.indexOf(n) !== -1)
 				questionNosSecond[i] = n;
 			}
@@ -216,13 +260,13 @@ $(document).ready(function () {
 			nint = 2, nexp = 2;
 			for(i=0; i<2; i++) {
 				do
-					n = Math.floor(Math.random() * (30 - 16 + 1)) + 16;
+					n = Math.floor(Math.random() * (eint - sint + 1)) + sint;
 				while(questionNosSecond.indexOf(n) !== -1)
 				questionNosSecond[i] = n;
 			}
 			for(i=2; i<4; i++) {
 				do
-					n = Math.floor(Math.random() * (45 - 31 + 1)) + 31;
+					n = Math.floor(Math.random() * (eep - sep + 1)) + sep;
 				while(questionNosSecond.indexOf(n) !== -1)
 				questionNosSecond[i] = n;
 			}
@@ -230,12 +274,12 @@ $(document).ready(function () {
 		else if(current_level == 'expert') {
 			nint = 1; nexp = 3;
 			do
-				n = Math.floor(Math.random() * (30 - 16 + 1)) + 16;
+				n = Math.floor(Math.random() * (eint - sint + 1)) + sint;
 			while(questionNosSecond.indexOf(n) !== -1)
 			questionNosSecond[0] = n;
 			for(i=1; i<4; i++) {
 				do
-					n = Math.floor(Math.random() * (45 - 31 + 1)) + 31;
+					n = Math.floor(Math.random() * (eep - sep + 1)) + sep;
 				while(questionNosSecond.indexOf(n) !== -1)
 				questionNosSecond[i] = n;
 			}
@@ -267,8 +311,6 @@ $(document).ready(function () {
 		setTimeout(displayQuestion, 1500);
     }
     
-    generate_bankingquiz();
-
 	//This will come into picture after the first 4 questions
 	getNextQuestion = function(length) {
 		var n;
@@ -278,19 +320,19 @@ $(document).ready(function () {
 
 		if(current_level == 'beginner') {
 			do
-				n = Math.floor(Math.random() * (15 - 1 + 1)) + 1;
+				n = Math.floor(Math.random() * (ebeg - sbeg + 1)) + sbeg;
 			while(questionNosSecond.indexOf(n) !== -1)
 			questionNosSecond[questionNumber] = n;
 		}
 		else if(current_level == 'intermediate') {
 			do
-				n = Math.floor(Math.random() * (30 - 16 + 1)) + 16;
+				n = Math.floor(Math.random() * (eint - sint + 1)) + sint;
 			while(questionNosSecond.indexOf(n) !== -1)
 			questionNosSecond[questionNumber] = n;
 		}
 		else if(current_level == 'expert') {
 			do
-				n = Math.floor(Math.random() * (45 - 31 + 1)) + 31;
+				n = Math.floor(Math.random() * (eep - sep + 1)) + sep;
 			while(questionNosSecond.indexOf(n) !== -1)
 			questionNosSecond[questionNumber] = n;
 		}
