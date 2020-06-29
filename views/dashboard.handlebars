@@ -113,32 +113,42 @@
         </div>
 
         <div class="row">
-          <div class="col-lg-6">
+          <div class="col-lg-4">
             <div class="package text-center bg-white">
               <span class="img-wrap"><img src="images/flaticon/svg/001-jigsaw.svg" alt="Image" class="img-fluid"></span>
               <h3 class="text-teal">Banking</h3>
               <!-- <p>Take the quiz to find out where you stand </p> -->
-              <p><a href="/banking" class="btn btn-primary btn-custom-1 mt-4" id="bank">Go to quiz</a></p>
+              <p><a href="/second_quiz?section=banking" class="btn btn-primary btn-custom-1 mt-4" id="banking">Go to Secondary quiz</a></p>
             </div>
           </div>
 
-          <div class="col-lg-6">
+          <div class="col-lg-4">
             <div class="package text-center bg-white">
               <span class="img-wrap"><img src="images/flaticon/svg/002-target.svg" alt="Image" class="img-fluid"></span>
               <h3 class="text-success">Tax</h3>
               <!-- <p>Lorem ipsum dolor sit amet. Consequatur aliquam, fuga maiores amet quo corporis distinctio soluta recusandae?</p> -->
-              <p><a href="/tax" class="btn btn-warning btn-custom-1 mt-4" id="tax">Go to quiz</a></p>
+              
+              <!-- For those who havent given the Initiation quiz for tax (to be removed after a user attempts it)-->
+              <p><a href="/first_quiz?section=tax" class="btn btn-warning btn-custom-1 mt-4" id="tax">Go to Initiation quiz</a></p>
+
+              <!-- This will come into effect after Initiation for quiz has been attempted - Initiation will be disabled, Secondary will be enabled -->
+              <p><a href="/second_quiz?section=tax" class="btn btn-warning btn-custom-1 mt-4" id="tax">Go to Secondary quiz</a></p>
             </div>
           </div>
 
-          <!-- <div class="col-lg-4">
+          <div class="col-lg-4">
             <div class="package text-center bg-white">
               <span class="img-wrap"><img src="images/flaticon/svg/003-mission.svg" alt="Image" class="img-fluid"></span>
-              <h3 class="text-danger">Ask a financial advisor</h3>
-              <p>Lorem ipsum dolor sit amet. Consequatur aliquam, fuga maiores amet quo corporis distinctio soluta recusandae?</p>
-              <p><a href="/basics" class="btn btn-success btn-custom-1 mt-4">Learn More</a></p>
+              <h3 class="text-danger">Investments</h3>
+              <!-- <p>Lorem ipsum dolor sit amet. Consequatur aliquam, fuga maiores amet quo corporis distinctio soluta recusandae?</p> -->
+
+              <!-- For those who havent given the Initiation quiz for investments (to be removed after a user attempts it)-->
+              <p><a href="/first_quiz?section=investments" class="btn btn-success btn-custom-1 mt-4" id="investments">Go to Initiation quiz</a></p>
+
+              <!-- This will come into effect after Initiation for quiz has been attempted - Initiation will be disabled, Secondary will be enabled -->
+              <p><a href="/second_quiz?section=investments" class="btn btn-success btn-custom-1 mt-4" id="investments">Go to Secondary quiz</a></p>
             </div>
-          </div> -->
+          </div>
         </div>
 
       </div>
