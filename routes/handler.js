@@ -9,6 +9,7 @@ var path = require('path');
 var request = require('request');
 //var query = require('.././model/queries');
 
+var section;
 
 //Landing Page
 router.get('/',(req,res)=>{
@@ -17,7 +18,9 @@ router.get('/',(req,res)=>{
 
 //First Quiz
 router.get('/first_quiz',(req,res)=>{
+    console.log(req.query.section);
     res.render('first_quiz',{layout : 'first_quiz.handlebars'});
+    section = req.query.section;
 });
 
 //Dashboard
@@ -25,16 +28,17 @@ router.get('/dashboard',(req,res)=>{
     res.render('dashboard',{layout : 'dashboard.handlebars'});
 });
 
-//Banking Quiz
-router.get('/banking',(req,res)=>{
+//Second Quiz
+router.get('/second_quiz',(req,res)=>{
+    console.log(req.query.section);
     res.render('second_quiz',{layout : 'second_quiz.handlebars'});
+    section = req.query.section;
 });
 
-//Tax Quiz
-router.get('/tax',(req,res)=>{
-    res.render('second_quiz',{layout : 'second_quiz.handlebars'});
-});
-
+//Fetch Section/Domain
+router.get('/findSection',(req,res)=> {
+    res.send(section);
+})
 
 //handler for facebook
 router.get('/basics',(req,res)=>{
@@ -86,9 +90,6 @@ router.get('/fuzzy',(req,res) => {
     }) 
 });
 
-
- 
-  
  
 //For Facebook
 var request = require('request');
@@ -154,9 +155,6 @@ router.get('/facebook/callback', function (req, res) {
     );
    }
  
-  });
- 
-
-       
+  }); 
 
 module.exports=router;
