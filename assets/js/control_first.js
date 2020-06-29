@@ -18,64 +18,103 @@ $(document).ready(function () {
 	//questionBank[i][5] will store the id of the correct answer
 	var score = 0;
 
+	//To fetch proper question numbers
+	var sbeg, ebeg, sint, eint, sep, eep;
+
+	//Fetch what section (domain) the user wants to attempt
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+		  current_section = this.responseText;
+
+			if(current_section==="banking") {
+				document.getElementById('topbar').innerHTML = "Initiation Quiz for Banking";
+				sbeg = 1;
+				ebeg = 15;
+				sint = 16;
+				eint = 30;
+				sep = 31;
+				eep = 45;
+			}
+			else if(current_section==="tax") {
+				document.getElementById('topbar').innerHTML = "Initiation Quiz for Tax";
+				sbeg = 46;
+				ebeg = 60;
+				sint = 61;
+				eint = 75;
+				sep = 76;
+				eep = 90;
+			}
+			else if(current_section==="investments") {
+				document.getElementById('topbar').innerHTML = "Initiation Quiz for Investments";
+				sbeg = 91;
+				ebeg = 105;
+				sint = 106;
+				eint = 120;
+				sep = 121;
+				eep = 135;
+			}
+
+			//Get those 9 questions from the JSON file
+			$.getJSON('activity.json', function(data) {
+				var arr = generate_firstquiz(3);
+				var q_number;
+				var num = 0;
+
+				//For every question in the question bank 
+				for(i=0; i<data.quizlist.length; i++) {
+					q_number = Number(data.quizlist[i].q_id);	
+					console.log("Displaying question number next")
+					console.log(q_number)
+					if(arr.indexOf(q_number)>=0)	//Search q_number in arr
+					{
+						questionBank[num]=new Array;
+						questionBank[num][0]=data.quizlist[i].question;
+						questionBank[num][1]=data.quizlist[i].option1;
+						questionBank[num][2]=data.quizlist[i].option2;
+						questionBank[num][3]=data.quizlist[i].option3;
+						questionBank[num][4]=data.quizlist[i].option4;
+						questionBank[num][5]=data.quizlist[i].correct; 
+						num++;
+					}
+				}
+
+				console.log("Displaying all 9 questions and their options next")
+				console.log(questionBank)
+				numberOfQuestions=questionBank.length;		//This would be 9
+				
+				displayQuestion();	
+			})
+		}
+	};
+	xhttp.open("GET","/findSection", true);
+	xhttp.send();
+
 
 	//Randomly select 3 questions each from the beginner, intermediate and expert sections to curate a list of 9 questions for the Initiation Quiz
 	generate_firstquiz = function(length) {
-		document.getElementById('topbar').innerHTML = "Initiation Quiz";
 		var arr = [];
 		var n;
 		for(var i=0; i<3; i++) {
 			do
-				n = Math.floor(Math.random() * (15 - 1 + 1)) + 1;
+				n = Math.floor(Math.random() * (ebeg - sbeg + 1)) + sbeg;
 			while(arr.indexOf(n) !== -1)
 			arr[i] = n;
 		}
 		for(var i=3; i<6; i++) {
 			do
-				n = Math.floor(Math.random() * (30 - 16 + 1)) + 16;
+				n = Math.floor(Math.random() * (eint - sint + 1)) + sint;
 			while(arr.indexOf(n) !== -1)
 			arr[i] = n;
 		}
 		for(var i=6; i<9; i++) {
 			do
-				n = Math.floor(Math.random() * (45 - 31 + 1)) + 31;
+				n = Math.floor(Math.random() * (eep - sep + 1)) + sep;
 			while(arr.indexOf(n) !== -1)
 			arr[i] = n;
 		}
 		return arr;
 	}
-
-
-	//Get those 9 questions from the JSON file
-	$.getJSON('activity.json', function(data) {
-		var arr = generate_firstquiz(3);
-		var q_number;
-		var num = 0;
-
-		//For every question in the question bank 
-		for(i=0; i<data.quizlist.length; i++) {
-			q_number = Number(data.quizlist[i].q_id);	
-			console.log("Displaying question number next")
-			console.log(q_number)
-			if(arr.indexOf(q_number)>=0)	//Search q_number in arr
-			{
-				questionBank[num]=new Array;
-				questionBank[num][0]=data.quizlist[i].question;
-				questionBank[num][1]=data.quizlist[i].option1;
-				questionBank[num][2]=data.quizlist[i].option2;
-				questionBank[num][3]=data.quizlist[i].option3;
-				questionBank[num][4]=data.quizlist[i].option4;
-				questionBank[num][5]=data.quizlist[i].correct; 
-				num++;
-			}
-		}
-
-		console.log("Displaying all 9 questions and their options next")
-		console.log(questionBank)
-		numberOfQuestions=questionBank.length;		//This would be 9
-		
-		displayQuestion();	
-	})
 	
 	
 	function displayQuestion() {
@@ -164,6 +203,7 @@ $(document).ready(function () {
 					setTimeout(function() { 
 						$(stage).append('<div class="questionText">You have finished the quiz!<br><br>Total questions: '+numberOfQuestions+'<br>Correct answers: '+score+'<br>Your current level is '+current_level+'</div><br><br>');
 						$(stage).append('<a href="/dashboard" class="btn btn-light btn-custom-2 mt-4"> Go to my dashboard </a>');
+						//When a user goes to the dashboard, they should not see the Initiation quiz links for tax and investments
 					}, 2000); 
 				}); 
 			}
@@ -171,16 +211,20 @@ $(document).ready(function () {
 
 		xhttp.send();
 
-		setTimeout(function() {
-			//Setting cookie
-			var d = new Date();
-			d.setTime(d.getTime() + (20*24*60*60*1000));
-			var expires = "expires=" + d.toUTCString();
-			console.log(expires); 
-			document.cookie = "Current Level = " + current_level + expires; 
+		//Set cookie only for banking, for the other two we can just set them in the database directly
 
-			console.log(document.cookie);
-			console.log("Current user level is " + current_level);
-		}, 2000);
+		if(current_section==="banking") {
+			setTimeout(function() {
+				//Setting cookie
+				var d = new Date();
+				d.setTime(d.getTime() + (20*24*60*60*1000));
+				var expires = "expires=" + d.toUTCString();
+				console.log(expires); 
+				document.cookie = "Current Level = " + current_level + expires; 
+	
+				console.log(document.cookie);
+				console.log("Current user level is " + current_level);
+			}, 2000);
+		}
 	}
 });
