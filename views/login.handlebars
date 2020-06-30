@@ -4,33 +4,10 @@
   <head>
     <title>Fin/lit &mdash; Website Template by Colorlib</title>
     <meta charset="utf-8">
-    <script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '654468531700385',
-      xfbml      : true,
-      version    : 'v7.0'
-    });
-    FB.AppEvents.logPageView();
-  };
-
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "https://connect.facebook.net/en_US/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
-</script>
-    
-  <link rel="apple-touch-icon" sizes="76x76" href="img/apple-icon.png">
-  <link rel="icon" type="image/png" href="img/favicon.png">
-  <link rel="manifest" href="manifest.json">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link href="https://fonts.googleapis.com/css?family=DM+Sans:300,400,700|Indie+Flower" rel="stylesheet">
-
+    
     <link rel="stylesheet" href="fonts/icomoon/style.css">
 
     <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -47,7 +24,7 @@
   </head>
 
   <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
-
+    
     <div class="site-wrap" id="home-section">
 
       <div class="site-mobile-menu site-navbar-target">
@@ -59,13 +36,14 @@
         <div class="site-mobile-menu-body"></div>
       </div>
 
-      <!-- <header class="site-navbar site-navbar-target" role="banner"> -->
+        <!-- <header class="site-navbar site-navbar-target" role="banner"> -->
+        
         <div class="container mb-3">
           <div class="d-flex align-items-center">
             <div class="site-logo mr-auto">
               <a href="/">Fin/lit<span class="text-primary">.</span></a>
             </div>
-         <!-- <div class="site-quick-contact d-none d-lg-flex ml-auto">
+            <!-- <div class="site-quick-contact d-none d-lg-flex ml-auto ">
               <div class="d-flex site-info align-items-center mr-5">
                 <span class="block-icon mr-3"><span class="icon-map-marker text-yellow"></span></span>
                 <span>34 Street Name, City Name Here, <br> United States</span>
@@ -74,6 +52,7 @@
                 <span class="block-icon mr-3"><span class="icon-clock-o"></span></span>
                 <span>Sunday - Friday 8:00AM - 4:00PM <br> Saturday CLOSED</span>
               </div>
+              
             </div> -->
           </div>
         </div>
@@ -81,72 +60,52 @@
         <div class="container">
           <div class="menu-wrap d-flex align-items-center">
             <span class="d-inline-block d-lg-none"><a href="#" class="text-black site-menu-toggle js-menu-toggle py-5"><span class="icon-menu h3 text-black"></span></a></span>
-
               <nav class="site-navigation text-left mr-auto d-none d-lg-block" role="navigation">
                 <ul class="site-menu main-menu js-clone-nav mr-auto ">
-                  <li><a href="" class="nav-link">Go to Quiz</a></li>
+                  <li><a href="" class="nav-link">Home</a></li>
                   <!-- this is esentially like a social media home page... look at your friends' updates -->
-                  <li class="active"><a href="packages.html" class="nav-link">My Profile</a></li>
-                  <li><a href="/basics" class="nav-link">Post My Scores on Facebook</a></li>
-                  <li><a href="/logout" class="nav-link">Log Out</a></li>
+                  <li class="active"><a href="" class="nav-link">Packages</a></li>
+                  <li><a href="/register" class="nav-link">Register</a></li>
+                  <li><a href="/login" class="nav-link">Login</a></li>
+                  <li><a href="" class="nav-link">About Us</a></li>
                   <!-- info about what our app does.. and is about...  -->
                 </ul>
               </nav>
 
-              <!--<div class="top-social ml-auto">
+              <div class="top-social ml-auto">
                 <a href="#"><span class="icon-facebook text-teal"></span></a>
                 <a href="#"><span class="icon-twitter text-success"></span></a>
                 <a href="#"><span class="icon-linkedin text-yellow"></span></a>
-              </div>-->
+              </div>
           </div>
         </div>
-      <!-- </header> -->
+
+       
+
+        <!-- </header> -->
 
     <div class="site-section bg-info">
       <div class="container">
 
         <div class="row mb-5">
           <div class="col-12 text-center">
-            <!-- <span class="text-cursive h5 text-red d-block">Packages </span> -->
-            <h2 class="text-white">Dashboard</h2>
+            <span class="text-cursive h5 text-red d-block"> Packages </span>
+            <h2 class="text-white"> Available </h2>
           </div>
         </div>
 
         <div class="row">
-          <div class="col-lg-4">
+          <div class="col-lg-12">
             <div class="package text-center bg-white">
-              <span class="img-wrap"><img src="images/flaticon/svg/001-jigsaw.svg" alt="Image" class="img-fluid"></span>
-              <h3 class="text-teal">Banking</h3>
-              <!-- <p>Take the quiz to find out where you stand </p> -->
-              <p><a href="/second_quiz?section=banking" class="btn btn-primary btn-custom-1 mt-4" id="banking">Go to Secondary quiz</a></p>
-            </div>
-          </div>
-
-          <div class="col-lg-4">
-            <div class="package text-center bg-white">
-              <span class="img-wrap"><img src="images/flaticon/svg/002-target.svg" alt="Image" class="img-fluid"></span>
-              <h3 class="text-success">Tax</h3>
-              <!-- <p>Lorem ipsum dolor sit amet. Consequatur aliquam, fuga maiores amet quo corporis distinctio soluta recusandae?</p> -->
-              
-              <!-- For those who havent given the Initiation quiz for tax (to be removed after a user attempts it)-->
-              <p><a href="/first_quiz?section=tax" class="btn btn-warning btn-custom-1 mt-4" id="tax">Go to Initiation quiz</a></p>
-
-              <!-- This will come into effect after Initiation for quiz has been attempted - Initiation will be disabled, Secondary will be enabled -->
-              <p><a href="/second_quiz?section=tax" class="btn btn-warning btn-custom-1 mt-4" id="tax">Go to Secondary quiz</a></p>
-            </div>
-          </div>
-
-          <div class="col-lg-4">
-            <div class="package text-center bg-white">
-              <span class="img-wrap"><img src="images/flaticon/svg/003-mission.svg" alt="Image" class="img-fluid"></span>
-              <h3 class="text-danger">Investments</h3>
-              <!-- <p>Lorem ipsum dolor sit amet. Consequatur aliquam, fuga maiores amet quo corporis distinctio soluta recusandae?</p> -->
-
-              <!-- For those who havent given the Initiation quiz for investments (to be removed after a user attempts it)-->
-              <p><a href="/first_quiz?section=investments" class="btn btn-success btn-custom-1 mt-4" id="investments">Go to Initiation quiz</a></p>
-
-              <!-- This will come into effect after Initiation for quiz has been attempted - Initiation will be disabled, Secondary will be enabled -->
-              <p><a href="/second_quiz?section=investments" class="btn btn-success btn-custom-1 mt-4" id="investments">Go to Secondary quiz</a></p>
+              <h2 class="text-teal">Login</h2>
+               <form id="registeration-form" action="log">
+                <label for="username">Username:</label>
+                <input type="text" name="username" value="">
+                <br>
+                <label for="password">Password:</label>
+                <input type="text" name="password" value="">
+                <br>
+                <input type="submit" class="btn btn-primary btn-custom-1 mt-4" value="submit">
             </div>
           </div>
         </div>
@@ -155,9 +114,10 @@
     </div>
     
     
-    <!-- <footer class="site-footer">
+    <footer class="site-footer">
       <div class="container">
         <div class="row">
+          
           <div class="col-lg-4">
             <h2 class="footer-heading mb-3">About Us</h2>
                 <p class="mb-5">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. </p>
@@ -171,6 +131,7 @@
 
           <div class="col-lg-8 ml-auto">
             <div class="row">
+
               <div class="col-lg-4 ml-auto">
                 <h2 class="footer-heading mb-4">Navigation</h2>
                 <ul class="list-unstyled">
@@ -192,24 +153,28 @@
                   <li><a href="#">Contact Us</a></li>
                 </ul>
               </div>
+
             </div>
           </div>
+
         </div>
+
         <div class="row pt-5 mt-5 text-center">
           <div class="col-md-12">
             <div class="border-top pt-5">
               <p>
-            Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
             Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart text-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" >Colorlib</a>
-            Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
             </p>
             </div>
           </div>
         </div>
-      </div>
-    </footer> -->
 
-    </div>
+      </div>
+    </footer>
+
+  </div>
 
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/jquery-migrate-3.0.0.js"></script>
