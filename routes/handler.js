@@ -176,7 +176,6 @@ router.get("/reg", (req, res) => {
         if (err) {
           res.redirect("/register");
           console.log("Redirecting2");
-          throw err;
         } else {
           login = true;
           username = req.query.username;
