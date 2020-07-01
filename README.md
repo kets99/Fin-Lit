@@ -4,9 +4,7 @@ The application has been deployed here:  https://fin-lit2020.herokuapp.com/.
 If you’re using it on your mobile browser, you can also ‘Add it to homepage’ to use it as a mobile application.
 When a user first goes to the website homepage, they are greeted with this page.
 
-![alt text](https://github.com/[username]/[reponame]/blob/[branch]/image.jpg?raw=true)
-
-https://github.com/kets99/Fin-Lit/blob/hints-exp-timer/assets/images/img1.PNG
+![alt text](https://github.com/kets99/Fin-Lit/blob/hints-exp-timer/assets/images/img1.PNG)
 
 
 Here, they have the option to Register/Login or take the initiation quiz.
