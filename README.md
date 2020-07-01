@@ -14,14 +14,17 @@ Since, our application is a **Progressive Web Application** or **PWA**, you can 
 
 - When opening the website on a web browser on your mobile device, you can choose the option 'Add to Home Screen':
 
-![alt text](https://github.com/kets99/Fin-Lit/blob/hints-exp-timer/assets/images/img1.PNG)
+![alt text](https://github.com/kets99/Fin-Lit/blob/hints-exp-timer/assets/images/Mobile_1.PNG) <br>
+![alt text](https://github.com/kets99/Fin-Lit/blob/hints-exp-timer/assets/images/Mobile_2.PNG)
+
 
 <br>
 
 - This creates the mobile-app version of the website on your mobile. Open it and you can navigate through it like any other native application!
 
-![alt text](https://github.com/kets99/Fin-Lit/blob/hints-exp-timer/assets/images/img1.PNG)
+![alt text](https://github.com/kets99/Fin-Lit/blob/hints-exp-timer/assets/images/Mobile_3.PNG) <br>
 
+![alt text](https://github.com/kets99/Fin-Lit/blob/hints-exp-timer/assets/images/Mobile_4.PNG) 
 
 <br><br>
 - When a user first visits our website, they are greeted with the **Home Page**:
@@ -81,7 +84,7 @@ Since, our application is a **Progressive Web Application** or **PWA**, you can 
 
 - As they attempt a **Secondary quiz**, they can see intermediate results, wherein they can see their current score, the difficulty level of the question that's to come next based on the user's performance and finally an option to save their progress:
 
-![alt text](https://github.com/kets99/Fin-Lit/blob/hints-exp-timer/assets/images/img1.PNG)
+![alt text](https://github.com/kets99/Fin-Lit/blob/hints-exp-timer/assets/images/Secondary%20Results.png)
 
 
 <br>
@@ -91,6 +94,9 @@ Since, our application is a **Progressive Web Application** or **PWA**, you can 
 ![alt text](https://github.com/kets99/Fin-Lit/blob/hints-exp-timer/assets/images/img9.PNG)
 
 - If you are using the website as a mobile application like we explained before, this is how the application will look like:
-![alt text](https://github.com/kets99/Fin-Lit/blob/hints-exp-timer/assets/images/img1.PNG)
 
+![alt text](https://github.com/kets99/Fin-Lit/blob/hints-exp-timer/assets/images/Mobile_5.PNG) <br>
 
+![alt text](https://github.com/kets99/Fin-Lit/blob/hints-exp-timer/assets/images/Mobile_6.PNG) <br>
+
+![alt text](https://github.com/kets99/Fin-Lit/blob/hints-exp-timer/assets/images/Mobile_7.PNG)
