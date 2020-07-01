@@ -23,55 +23,243 @@ $(document).ready(function () {
 	var timer_clock = 30;
 
 	var current_section;
+	
+	//To check if the user has asked for Info Bites
+	var infoBites = "0";
 
 	//To fetch proper question numbers
 	var sbeg, ebeg, sint, eint, sep, eep;
 
-	//Fetch what section (domain) the user wants to attempt
-	var xhttp = new XMLHttpRequest();
-	xhttp.onreadystatechange = function() {
+	var pageTitle = document.title;
+
+	//To fetch user details
+	//Should be for every user (include in db)
+	var userDetails, userID, name, username, email, password, banking_initiation_level, banking_initiation_score, tax_initiation_level=-1, tax_initiation_score=-1, investments_initiation_level=-1, investments_initiation_score=-1, loans_initiation_level=-1, loans_initiation_score=-1;
+	var banking_secondary_level=-1, banking_secondary_score=-1, investments_secondary_level=-1, investments_secondary_score=-1, tax_secondary_level=-1, tax_secondary_score=-1, loans_secondary_level=-1, loans_secondary_score=-1;
+	var banking_quiz_entry=0;
+	var tax_quiz_entry=0;
+	var investments_quiz_entry=0;
+	var loans_quiz_entry=0;
+	var banking_qno=0, tax_qno=0, investments_qno=0, loans_qno=0;
+
+	//Fetch all details
+	var xhttp_1 = new XMLHttpRequest();
+	xhttp_1.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
-		  current_section = this.responseText;
+			userDetails = JSON.parse(this.responseText);
+			userID = userDetails._id;	
+			name = userDetails.name;
+			username = userDetails.username;
+			email = userDetails.email;
+			password = userDetails.password;
+			banking_initiation_level = userDetails.banking_initiation_level;
+			banking_initiation_score = userDetails.banking_initiation_score;
+			tax_initiation_level = userDetails.tax_initiation_level;
+			tax_initiation_score = userDetails.tax_initiation_score;
+			investments_initiation_level = userDetails.investments_initiation_level;
+			investments_initiation_score = userDetails.investments_initiation_score;
+			loans_initiation_level = userDetails.loans_initiation_level;
+			loans_initiation_score = userDetails.loans_initiation_score;
+			banking_secondary_level = userDetails.banking_secondary_level;
+			banking_secondary_score = userDetails.banking_secondary_score;
+			banking_quiz_entry = userDetails.banking_quiz_entry;
+			tax_secondary_level = userDetails.tax_secondary_level;
+			tax_secondary_score = userDetails.tax_secondary_score;
+			tax_quiz_entry = userDetails.tax_quiz_entry;
+			investments_secondary_level = userDetails.investments_secondary_level;
+			investments_secondary_score = userDetails.investments_secondary_score;
+			investments_quiz_entry = userDetails.investments_quiz_entry;
+			loans_secondary_level = userDetails.loans_secondary_level;
+			loans_secondary_score = userDetails.loans_secondary_score;
+			loans_quiz_entry = userDetails.loans_quiz_entry;
+			banking_qno = userDetails.banking_qno;
+			tax_qno = userDetails.tax_qno;
+			investments_qno = userDetails.investments_qno;
+			loans_qno = userDetails.loans_qno;
+			
+			//Before proceeding, check if they have attempted initiation for tax or investments and accordingly modify buttons
+			var xhttp_2 = new XMLHttpRequest();
+			xhttp_2.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					var resp = JSON.parse(this.responseText);
 
-			var topbar = document.getElementById('topbar');
-			if(current_section==="banking") {
-				topbar.innerHTML = "Banking";
-				sbeg = 1;
-				ebeg = 15;
-				sint = 16;
-				eint = 30;
-				sep = 31;
-				eep = 45;
+					//Attempted Tax
+					if(resp.tax_set==true) {
+						userDetails.tax_initiation_level = resp.tax_init_level;
+						userDetails.tax_initiation_score = resp.tax_init_score;
+					}
 
-				var cookie_arr = document.cookie.split("expires=");
-				var current_level = (cookie_arr[0].split("="))[1];
-				console.log("Cookie retrieved");
-				console.log(current_level);
-			}
-			else if(current_section==="tax") {
-				topbar.innerHTML = "Tax";
-				sbeg = 46;
-				ebeg = 60;
-				sint = 61;
-				eint = 75;
-				sep = 76;
-				eep = 90;
-			}
-			else if(current_section==="investments") {
-				topbar.innerHTML = "Investments";
-				sbeg = 91;
-				ebeg = 105;
-				sint = 106;
-				eint = 120;
-				sep = 121;
-				eep = 135;
-			}
+					//Attempted Investments
+					if(resp.invest_set==true) {
+						userDetails.investments_initiation_level = resp.invest_init_level;
+						userDetails.investments_initiation_score = resp.invest_init_score;
+					}
 
-			generate_secondquiz();
+					//Attempted Loans
+					if(resp.loans_set==true) {
+						userDetails.loans_initiation_level = resp.loans_init_level;
+						userDetails.loans_initiation_score = resp.loans_init_score;
+					}
+					console.log(userDetails.tax_initiation_level);
+					console.log(userDetails.investments_initiation_level);
+					console.log(userDetails.loans_initiation_level);
+				}
+			}
+			xhttp_2.open("GET","/sendTaxInvest", true);
+			xhttp_2.send();
+			
+			setTimeout(function() { 
+				if(pageTitle==="Dashboard") {
+					if(userDetails.tax_initiation_level==-1) {
+						document.getElementsByClassName("taxbody")[0].innerHTML = "Since you are just starting out with Tax, we will need you to attempt the initiation quiz first";
+						document.getElementsByClassName("taxclass")[1].remove();
+					}
+					else {
+						document.getElementsByClassName("taxbody")[0].innerHTML = "You can attempt the secondary quiz now for Tax";
+						document.getElementsByClassName("taxclass")[0].remove();
+					}
+
+					if(userDetails.investments_initiation_level==-1) {
+						document.getElementsByClassName("investmentsbody")[0].innerHTML = "Since you are just starting out with Investments, we will need you to attempt the initiation quiz first";
+						document.getElementsByClassName("investmentsclass")[1].remove();
+					}
+					else {
+						document.getElementsByClassName("investmentsbody")[0].innerHTML = "You can attempt the secondary quiz now for Investments";
+						document.getElementsByClassName("investmentsclass")[0].remove();
+					}
+
+					if(userDetails.loans_initiation_level==-1) {
+						document.getElementsByClassName("loansbody")[0].innerHTML = "Since you are just starting out with Loans, we will need you to attempt the initiation quiz first";
+						document.getElementsByClassName("loansclass")[1].remove();
+					}
+					else {
+						document.getElementsByClassName("loansbody")[0].innerHTML = "You can attempt the secondary quiz now for Loans";
+						document.getElementsByClassName("loansclass")[0].remove();
+					}
+				}
+			}, 70);
 		}
-	};
-	xhttp.open("GET","/findSection", true);
-	xhttp.send();
+	}
+	xhttp_1.open("GET","/ifLoggedIn", true);
+	xhttp_1.send();
+
+	setTimeout(function() {
+		if(pageTitle==="Secondary Quiz") {
+			//Fetch what section (domain) the user wants to attempt
+			var xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					current_section = this.responseText.split(" ")[0];
+					infoBites =  this.responseText.split(" ")[1];
+	
+					var topbar = document.getElementById('topbar');
+					if(current_section==="banking") {
+						topbar.innerHTML = "Banking";
+						sbeg = 1;
+						ebeg = 15;
+						sint = 16;
+						eint = 30;
+						sep = 31;
+						eep = 45;
+	
+						if(infoBites==="0") {
+							if(userDetails.banking_quiz_entry==0) {
+								current_level = userDetails.banking_initiation_level;
+								generate_secondquiz();
+							}
+							else if(userDetails.banking_quiz_entry==1) {
+								current_level = userDetails.banking_secondary_level;
+								overall_score = parseInt(userDetails.banking_secondary_score);
+								questionNumber = parseInt(userDetails.banking_qno);
+								getNextQuestion();
+							}
+						}
+						else if(infoBites==="1") {
+							setInterval(showBites, 20000);
+						}
+					}
+					else if(current_section==="tax") {
+						topbar.innerHTML = "Tax";
+						sbeg = 46;
+						ebeg = 60;
+						sint = 61;
+						eint = 75;
+						sep = 76;
+						eep = 90;
+	
+						if(infoBites==="0") {
+							if(userDetails.tax_quiz_entry==0) {
+								current_level = userDetails.tax_initiation_level;
+								generate_secondquiz();
+							}
+							else if(userDetails.tax_quiz_entry==1) {
+								current_level = userDetails.tax_secondary_level;
+								overall_score = parseInt(userDetails.tax_secondary_score);
+								questionNumber = parseInt(userDetails.tax_qno);
+								getNextQuestion();
+							}
+						}
+						else if(infoBites==="1") {
+							setInterval(showBites, 20000);
+						}
+					}
+					else if(current_section==="investments") {
+						topbar.innerHTML = "Investments";
+						sbeg = 91;
+						ebeg = 105;
+						sint = 106;
+						eint = 120;
+						sep = 121;
+						eep = 135;
+	
+						if(infoBites==="0") {
+							if(userDetails.investments_quiz_entry==0) {
+								current_level = userDetails.investments_initiation_level;
+								generate_secondquiz();
+							}
+							else if(userDetails.investments_quiz_entry==1) {
+								current_level = userDetails.investments_secondary_level;
+								overall_score = parseInt(userDetails.investments_secondary_score);
+								questionNumber = parseInt(userDetails.investments_qno);
+								getNextQuestion();
+							}
+						}
+						else if(infoBites==="1") {
+							setInterval(showBites, 20000);
+						}
+					}
+
+					else if(current_section==="loans") {
+						topbar.innerHTML = "Loans";
+						sbeg = 136;
+						ebeg = 145;
+						sint = 146;
+						eint = 155;
+						sep = 156;
+						eep = 165;
+	
+						if(infoBites==="0") {
+							if(userDetails.loans_quiz_entry==0) {
+								current_level = userDetails.loans_initiation_level;
+								generate_secondquiz();
+							}
+							else if(userDetails.loans_quiz_entry==1) {
+								current_level = userDetails.loans_secondary_level;
+								overall_score = parseInt(userDetails.loans_secondary_score);
+								questionNumber = parseInt(userDetails.loans_qno);
+								getNextQuestion();
+							}
+						}
+						else if(infoBites==="1") {
+							setInterval(showBites, 20000);
+						}
+					}
+				}
+			};
+			xhttp.open("GET","/findSection", true);
+			xhttp.send();
+		}
+	}, 1000)
 
 	//For displaying each question
 	function displayQuestion() {
@@ -219,7 +407,9 @@ $(document).ready(function () {
 					}
 					$(stage).append('<div class="scoreText">Your score until now: '+overall_score+'</div>');
 					$(stage).append('<div class="questionText">Your next question will be of level: '+current_level+'</div>');
-					$(stage).append('<a href="javascript:getNextQuestion();" class="btn btn-light btn-custom-2 mt-4"> Show next question </a>');
+					$(stage).append('<a href="javascript:getNextQuestion();" class="btn btn-light btn-custom-2 mt-4"> Show next question </a><br>');
+					$(stage).append('<a href="javascript:saveDetails();" class="btn btn-light btn-custom-2 mt-4"> Save my Progress </a><br>');
+					$(stage).append('<a href="/dashboard" class="btn btn-light btn-custom-2 mt-4"> Exit and return to the Dashboard</a><br>');
 					console.log(result);
 				}
 			}
@@ -230,7 +420,6 @@ $(document).ready(function () {
 
 		$(stage2).animate({"right": "+=800px"},"slow", function() {$(stage2).css('right','-800px');$(stage2).empty();});
 		$(stage).animate({"right": "0px"},"slow", function() {$(stage).css('right','0px');questionLock=false;});
-
 	}
 
 	//Deciding the first four questions
@@ -317,6 +506,7 @@ $(document).ready(function () {
 		console.log("Number of questions displayed until now: "+questionNumber);
 		$(stage).children("div").remove();
 		$(stage).children("a").remove();
+		$(stage).children("br").remove();
 
 		if(current_level == 'beginner') {
 			do
@@ -364,5 +554,71 @@ $(document).ready(function () {
 		}
 
 		setTimeout(displayQuestion, 1500);
-	}	
+	}
+
+	saveDetails = function(length) {
+		if(current_section==="banking") {
+			userDetails.banking_quiz_entry = 1;
+			userDetails.banking_secondary_score = overall_score.toString();
+			userDetails.banking_secondary_level = current_level;
+			userDetails.banking_qno = questionNumber.toString();
+		}
+		else if(current_section==="tax") {
+			userDetails.tax_quiz_entry = 1;
+			userDetails.tax_secondary_score = overall_score.toString();
+			userDetails.tax_secondary_level = current_level;
+			userDetails.tax_qno = questionNumber.toString();
+		}
+		else if(current_section==="investments") {
+			userDetails.investments_quiz_entry = 1;
+			userDetails.investments_secondary_score = overall_score.toString();
+			userDetails.investments_secondary_level = current_level;
+			userDetails.investments_qno = questionNumber.toString();
+		}
+		else if(current_section==="loans") {
+			userDetails.loans_quiz_entry = 1;
+			userDetails.loans_secondary_score = overall_score.toString();
+			userDetails.loans_secondary_level = current_level;
+			userDetails.loans_qno = questionNumber.toString();
+		}
+
+		$(stage).append('<br><div class="scoreText"> Progress Saved! </div>');
+
+		var xhttp_4 = new XMLHttpRequest();
+		console.log(userDetails.loans_secondary_level);
+		var userURL = "/updateUserProgress?banking_secondary_level="+userDetails.banking_secondary_level+"&banking_secondary_score="+userDetails.banking_secondary_score+"&tax_secondary_level="+userDetails.tax_secondary_level+"&tax_secondary_score="+userDetails.tax_secondary_score+"&investments_secondary_level="+userDetails.investments_secondary_level+"&investments_secondary_score="+userDetails.investments_secondary_score+"&loans_secondary_level="+userDetails.loans_secondary_level+"&loans_secondary_score="+userDetails.loans_secondary_score+"&banking_quiz_entry="+userDetails.banking_quiz_entry+"&tax_quiz_entry="+userDetails.tax_quiz_entry+"&investments_quiz_entry="+userDetails.investments_quiz_entry+"&loans_quiz_entry="+userDetails.loans_quiz_entry+"&banking_qno="+userDetails.banking_qno+"&tax_qno="+userDetails.tax_qno+"&investments_qno="+userDetails.investments_qno+"&loans_qno="+userDetails.loans_qno;
+		console.log(userURL);
+		
+		xhttp_4.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				console.log(this.responseText);
+			}
+		}
+		xhttp_4.open("GET",userURL, true);
+		xhttp_4.send();
+	}
+
+	function showBites() {
+		//sbeg and eep
+		$(stage).children("div").remove();
+		$(stage).children("a").remove();
+		$(stage).children("br").remove();
+		console.log(sbeg);
+		console.log(eep);
+		var n = Math.floor(Math.random() * (eep - sbeg + 1)) + sbeg;
+		console.log(n);
+		var info;
+
+		$.getJSON('activity.json', function(data) {
+			info = data.quizlist[n-1].explanation;
+		})
+		console.log(info);
+
+		setTimeout(function() {
+			$(stage).append('<div class="infoText">'+info+'</div><br>');
+			$(stage).append('<a href="/dashboard" class="btn btn-light btn-custom-2 mt-4"> Go back to Dashboard </a><br><br>');
+
+			$(stage).append('<div class="infoText"> The slides will change in 20 seconds, take your time to read! </div><br>');
+		},1000);
+	}
 });
