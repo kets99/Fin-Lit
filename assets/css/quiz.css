@@ -36,6 +36,10 @@ font-size:27px;
 color:#FFF;
 }
 
+.infoText{
+font-size:20px;
+color:#FFF;
+}
 
 .option{
 width:400px;
@@ -190,7 +194,7 @@ margin: auto;
 padding: 20px;
 border: 1px solid #888;
 width:700px;
-height:300px;
+height:450px;
 background-color:#3399FF;
 border: 2px solid white;
 text-align:center;
