@@ -14,9 +14,9 @@ Since, our application is a **Progressive Web Application** or **PWA**, you can 
 
 - When opening the website on a web browser on your mobile device, you can choose the option 'Add to Home Screen':
 
-![alt text](https://github.com/kets99/Fin-Lit/blob/hints-exp-timer/assets/images/Mobile_1.PNG) <br>
+![alt text](https://github.com/kets99/Fin-Lit/blob/hints-exp-timer/assets/images/Mobile_1.png) <br>
 
-![alt text](https://github.com/kets99/Fin-Lit/blob/hints-exp-timer/assets/images/Mobile_2.jpg)
+![alt text](https://github.com/kets99/Fin-Lit/blob/hints-exp-timer/assets/images/Mobile_2.png)
 
 
 <br>
@@ -25,7 +25,7 @@ Since, our application is a **Progressive Web Application** or **PWA**, you can 
 
 ![alt text](https://github.com/kets99/Fin-Lit/blob/hints-exp-timer/assets/images/Mobile_3.png) <br>
 
-![alt text](https://github.com/kets99/Fin-Lit/blob/hints-exp-timer/assets/images/Mobile_4.PNG) 
+![alt text](https://github.com/kets99/Fin-Lit/blob/hints-exp-timer/assets/images/Mobile_4.png) 
 
 <br><br>
 - When a user first visits our website, they are greeted with the **Home Page**:
@@ -96,8 +96,8 @@ Since, our application is a **Progressive Web Application** or **PWA**, you can 
 
 - If you are using the website as a mobile application like we explained before, this is how the application will look like:
 
-![alt text](https://github.com/kets99/Fin-Lit/blob/hints-exp-timer/assets/images/Mobile_5.PNG) <br>
+![alt text](https://github.com/kets99/Fin-Lit/blob/hints-exp-timer/assets/images/Mobile_5.png) <br>
 
-![alt text](https://github.com/kets99/Fin-Lit/blob/hints-exp-timer/assets/images/Mobile_6.PNG) <br>
+![alt text](https://github.com/kets99/Fin-Lit/blob/hints-exp-timer/assets/images/Mobile_6.png) <br>
 
-![alt text](https://github.com/kets99/Fin-Lit/blob/hints-exp-timer/assets/images/Mobile_7.PNG)
+![alt text](https://github.com/kets99/Fin-Lit/blob/hints-exp-timer/assets/images/Mobile_7.png)
