@@ -5,7 +5,7 @@ If you’re using it on your mobile browser, you can also ‘Add it to homepage�
 When a user first goes to the website homepage, they are greeted with this page. 
 
 
-Here, they have the option to register/login or take the initiation quiz.
+Here, they have the option to Register/Login or take the initiation quiz.
 
 
 
