@@ -15,14 +15,15 @@ Since, our application is a **Progressive Web Application** or **PWA**, you can 
 - When opening the website on a web browser on your mobile device, you can choose the option 'Add to Home Screen':
 
 ![alt text](https://github.com/kets99/Fin-Lit/blob/hints-exp-timer/assets/images/Mobile_1.PNG) <br>
-![alt text](https://github.com/kets99/Fin-Lit/blob/hints-exp-timer/assets/images/Mobile_2.PNG)
+
+![alt text](https://github.com/kets99/Fin-Lit/blob/hints-exp-timer/assets/images/Mobile_2.jpg)
 
 
 <br>
 
 - This creates the mobile-app version of the website on your mobile. Open it and you can navigate through it like any other native application!
 
-![alt text](https://github.com/kets99/Fin-Lit/blob/hints-exp-timer/assets/images/Mobile_3.PNG) <br>
+![alt text](https://github.com/kets99/Fin-Lit/blob/hints-exp-timer/assets/images/Mobile_3.png) <br>
 
 ![alt text](https://github.com/kets99/Fin-Lit/blob/hints-exp-timer/assets/images/Mobile_4.PNG) 
 
