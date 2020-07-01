@@ -10,6 +10,9 @@ var request = require("request");
 //var query = require('.././model/queries');
 
 var section;
+var userDetails;
+var updatedUserDetails = {};
+var infoBites = 0;
 
 var app = express();
 
@@ -17,6 +20,19 @@ const fs = require("fs");
 var sessionId = "false";
 var username = "";
 var login = "";
+
+//For scoring
+var bank_init_level;
+var bank_init_score;
+var tax_init_level;
+var tax_init_score;
+var invest_init_level;
+var invest_init_score;
+var loans_init_level;
+var loans_init_score;
+var tax_set = false;
+var invest_set = false;
+var loans_set = false;
 
 var path = require("path");
 //var queries = require(path.join(__dirname,'../model/queries'));
@@ -38,6 +54,8 @@ app.use(
     extended: true,
   })
 );
+
+app.use(express.json());
 
 MongoClient.connect(
   uri,
@@ -96,13 +114,152 @@ router.get("/dashboard", (req, res) => {
     res.redirect("/register");
   } else {
     console.log(username);
+
+    //If they just attempted an initiation for either Tax or Investments
+    if(req.query.section==="tax") {
+      tax_init_level = req.query.level;
+      tax_init_score = req.query.score;
+      tax_set = true;
+      updatedUserDetails["tax_initiation_level"] = tax_init_level;
+      updatedUserDetails["tax_initiation_score"] = tax_init_score;
+      MongoClient.connect(uri, { useUnifiedTopology: true, },(err, client) => {
+        const db = client.db("Finlit");
+        const collection = db.collection("User");
+        db.collection("User").findOneAndUpdate({ username: userDetails["username"] },
+          {"$set": { tax_initiation_level: updatedUserDetails["tax_initiation_level"],
+                      tax_initiation_score: updatedUserDetails["tax_initiation_score"],}},
+          function (err, user) {
+            if(err) {
+              console.log("Error "+err);
+            }
+          })
+        });
+        userDetails = updatedUserDetails;
+    } else if(req.query.section==="invest") {
+      invest_init_level = req.query.level;
+      invest_init_score = req.query.score;
+      invest_set = true;
+      updatedUserDetails["investments_initiation_level"] = invest_init_level;
+      updatedUserDetails["investments_initiation_score"] = invest_init_score;
+      MongoClient.connect(uri, { useUnifiedTopology: true, },(err, client) => {
+        const db = client.db("Finlit");
+        const collection = db.collection("User");
+        db.collection("User").findOneAndUpdate({ username: userDetails["username"] },
+          {"$set": { investments_initiation_level: updatedUserDetails["investments_initiation_level"],
+                      investments_initiation_score: updatedUserDetails["investments_initiation_score"],}},
+          function (err, user) {
+            if(err) {
+              console.log("Error "+err);
+            }
+          })
+        });
+        userDetails = updatedUserDetails;
+    } else if(req.query.section==="loans") {
+      loans_init_level = req.query.level;
+      loans_init_score = req.query.score;
+      loans_set = true;
+      updatedUserDetails["loans_initiation_level"] = loans_init_level;
+      updatedUserDetails["loans_initiation_score"] = loans_init_score;
+      MongoClient.connect(uri, { useUnifiedTopology: true, },(err, client) => {
+        const db = client.db("Finlit");
+        const collection = db.collection("User");
+        db.collection("User").findOneAndUpdate({ username: userDetails["username"] },
+          {"$set": { loans_initiation_level: updatedUserDetails["loans_initiation_level"],
+                      loans_initiation_score: updatedUserDetails["loans_initiation_score"],}},
+          function (err, user) {
+            if(err) {
+              console.log("Error "+err);
+            }
+          })
+        });
+        userDetails = updatedUserDetails;
+    } else {}
     res.render("dashboard", { layout: "dashboard.handlebars" });
   }
 });
 
+//Send tax and/or investment results
+router.get("/sendTaxInvestLoans", (req, res) => {
+  if(tax_set==true || invest_set==true || loans_set==true) {
+    res.json({ 
+      tax_set : tax_set,
+      tax_init_level : tax_init_level,
+      tax_init_score : tax_init_score,
+      invest_set : invest_set,
+      invest_init_level : invest_init_level,
+      invest_init_score : invest_init_score,
+      loans_init_level : loans_init_level,
+      laons_init_score : loans_init_score   
+    });
+  }
+});
+
+//Update user progress
+router.get("/updateUserProgress", (req,res) => {
+  updatedUserDetails["banking_secondary_level"] = req.query.banking_secondary_level;
+  updatedUserDetails["banking_secondary_score"] = req.query.banking_secondary_score;
+  updatedUserDetails["tax_secondary_level"] = req.query.tax_secondary_level;
+  updatedUserDetails["tax_secondary_score"] = req.query.tax_secondary_score;
+  updatedUserDetails["investments_secondary_level"] = req.query.investments_secondary_level;
+  updatedUserDetails["investments_secondary_score"] = req.query.investments_secondary_score;
+  updatedUserDetails["loans_secondary_level"] = req.query.loans_secondary_level;
+  updatedUserDetails["loans_secondary_score"] = req.query.loans_secondary_score;
+  updatedUserDetails["banking_quiz_entry"] = req.query.banking_quiz_entry;
+  updatedUserDetails["tax_quiz_entry"] = req.query.tax_quiz_entry;
+  updatedUserDetails["investments_quiz_entry"] = req.query.investments_quiz_entry;
+  updatedUserDetails["loans_quiz_entry"] = req.query.loans_quiz_entry;
+  updatedUserDetails["banking_qno"] = req.query.banking_qno;
+  updatedUserDetails["tax_qno"] = req.query.tax_qno;
+  updatedUserDetails["investments_qno"] = req.query.investments_qno;
+  updatedUserDetails["loans_qno"] = req.query.loans_qno;
+  console.log(updatedUserDetails["loans_secondary_level"]);
+
+  userDetails = updatedUserDetails;
+
+  MongoClient.connect(
+    uri,
+    {
+      useUnifiedTopology: true,
+    },
+    (err, client) => {
+      const db = client.db("Finlit");
+      const collection = db.collection("User");
+      db.collection("User").findOneAndUpdate({ username: userDetails["username"] },
+        {"$set": { banking_secondary_level: updatedUserDetails["banking_secondary_level"],
+                   banking_secondary_score: updatedUserDetails["banking_secondary_score"],
+                   tax_secondary_level: updatedUserDetails["tax_secondary_level"],
+                   tax_secondary_score: updatedUserDetails["tax_secondary_score"],
+                   investments_secondary_level: updatedUserDetails["investments_secondary_level"],
+                   investments_secondary_score: updatedUserDetails["investments_secondary_score"],
+                   loans_secondary_level: updatedUserDetails["loans_secondary_level"],
+                   loans_secondary_score: updatedUserDetails["loans_secondary_score"],
+                   banking_quiz_entry: updatedUserDetails["banking_quiz_entry"],
+                   tax_quiz_entry: updatedUserDetails["tax_quiz_entry"],
+                   investments_quiz_entry: updatedUserDetails["investments_quiz_entry"],
+                   loans_quiz_entry: updatedUserDetails["loans_quiz_entry"],
+                   banking_qno: updatedUserDetails["banking_qno"],
+                   tax_qno: updatedUserDetails["tax_qno"],
+                   investments_qno: updatedUserDetails["investments_qno"],
+                   loans_qno: updatedUserDetails["loans_qno"]
+                  }},
+        function (err, user ) {
+          if(err) {
+            console.log("Error "+err);
+          }
+          console.log("User found");
+        })
+      });
+
+    res.send("Got updated details");
+    console.log(userDetails);
+});
+
+
 router.get("/logout", (req, res) => {
   username = "";
   login = "";
+  userDetails = {};
+  updatedUserDetails = {};
   res.redirect("/");
 });
 
@@ -111,11 +268,32 @@ router.get("/second_quiz", (req, res) => {
   console.log(req.query.section);
   res.render("second_quiz", { layout: "second_quiz.handlebars" });
   section = req.query.section;
+  if(req.query.info==="yes") {
+    console.log("Yep");
+    infoBites = 1;
+  }
+  else { infoBites = 0;}
 });
 
 //Fetch Section/Domain
 router.get("/findSection", (req, res) => {
-  res.send(section);
+  res.send(section+" "+infoBites);
+});
+
+//Retrieving cookie
+router.get("/cookiesHandler", (req, res) => {
+  var cookie = req.query.cookie;
+  var cookie_arr = cookie.split("expires=");
+  bank_init_level = (((cookie_arr[0].split("="))[1]).split(","))[0];
+  bank_init_score = ((cookie_arr[0].split("="))[2]).split(",")[0];
+  console.log("Cookie retrieved at handler");
+  console.log(bank_init_level);
+  console.log(bank_init_score);
+});
+
+//Sending user details at client's end (controller)
+router.get("/ifLoggedIn", (req, res) => {
+  res.send(userDetails);
 });
 
 //handler for facebook
@@ -153,6 +331,7 @@ router.get("/ip", (req, res) => {
   });
 });
 
+//Storing user details while registering
 router.get("/reg", (req, res) => {
   MongoClient.connect(
     uri,
@@ -171,11 +350,40 @@ router.get("/reg", (req, res) => {
         username: req.query.username,
         email: req.query.email,
         password: req.query.password,
+        banking_initiation_level: bank_init_level,
+        banking_initiation_score: bank_init_score,
+        tax_initiation_level: -1,
+        tax_initiation_score: -1,
+        investments_initiation_level: -1,
+        investments_initiation_score: -1,
+        loans_initiation_level: -1,
+        loans_initiation_score: -1,
+        banking_secondary_level: -1,
+        banking_secondary_score: -1,
+        tax_secondary_level: -1,
+        tax_secondary_score: -1,
+        investments_secondary_level: -1,
+        investments_secondary_score: -1,
+        loans_secondary_level: -1,
+        loans_secondary_score: -1,
+        banking_quiz_entry: 0,
+        tax_quiz_entry: 0,
+        investments_quiz_entry: 0,
+        loans_quiz_entry: 0,
+        banking_qno: 0,
+        tax_qno: 0,
+        investments_qno: 0,
+        loans_qno: 0
       };
+
+      userDetails = myobj;
+      updatedUserDetails = userDetails;
+
       db.collection("User").insertOne(myobj, function (err, resi) {
         if (err) {
           res.redirect("/register");
           console.log("Redirecting2");
+          // throw err;
         } else {
           login = true;
           username = req.query.username;
@@ -212,6 +420,8 @@ router.get("/log", (req, res) => {
           console.log("User and password is correct");
           login = true;
           username = req.query.username;
+          userDetails = user;
+          updatedUserDetails = userDetails;
           res.redirect("/dashboard");
         } else {
           console.log("Credentials wrong");
