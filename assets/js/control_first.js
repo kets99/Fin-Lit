@@ -1,7 +1,7 @@
 $(document).ready(function () {
 	
 	var questionNumber = 0;		//Tracks number of questions displayed
-	var questionBank = new Array;		//Stores the 9 questions
+	var questionBank = []	//Stores the 9 questions
 	
 	var stage = "#game1";
 	var stage2 = new Object;
@@ -25,7 +25,8 @@ $(document).ready(function () {
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
-		  current_section = this.responseText;
+			current_section = this.responseText.split(" ")[0];
+		  	console.log(current_section);
 
 			if(current_section==="banking") {
 				document.getElementById('topbar').innerHTML = "Initiation Quiz for Banking";
@@ -54,37 +55,49 @@ $(document).ready(function () {
 				sep = 121;
 				eep = 135;
 			}
+			else if(current_section==="loans") {
+				document.getElementById('topbar').innerHTML = "Initiation Quiz for Loans";
+				sbeg = 136;
+				ebeg = 145;
+				sint = 146;
+				eint = 155;
+				sep = 156;
+				eep = 165;
+			}
 
-			//Get those 9 questions from the JSON file
-			$.getJSON('activity.json', function(data) {
-				var arr = generate_firstquiz(3);
-				var q_number;
-				var num = 0;
-
-				//For every question in the question bank 
-				for(i=0; i<data.quizlist.length; i++) {
-					q_number = Number(data.quizlist[i].q_id);	
-					console.log("Displaying question number next")
-					console.log(q_number)
-					if(arr.indexOf(q_number)>=0)	//Search q_number in arr
-					{
-						questionBank[num]=new Array;
-						questionBank[num][0]=data.quizlist[i].question;
-						questionBank[num][1]=data.quizlist[i].option1;
-						questionBank[num][2]=data.quizlist[i].option2;
-						questionBank[num][3]=data.quizlist[i].option3;
-						questionBank[num][4]=data.quizlist[i].option4;
-						questionBank[num][5]=data.quizlist[i].correct; 
-						num++;
+			setTimeout(function() {
+				//Get those 9 questions from the JSON file
+				$.getJSON('activity.json', function(data) {
+					var arr = generate_firstquiz(3);
+					var q_number;
+					var num = 0;
+	
+					//For every question in the question bank 
+					for(i=0; i<data.quizlist.length; i++) {
+						q_number = Number(data.quizlist[i].q_id);	
+						console.log("Displaying question number next")
+						console.log(q_number)
+						if(arr.indexOf(q_number)>=0)	//Search q_number in arr
+						{
+							questionBank[num]=new Array;
+							questionBank[num][0]=data.quizlist[i].question;
+							questionBank[num][1]=data.quizlist[i].option1;
+							questionBank[num][2]=data.quizlist[i].option2;
+							questionBank[num][3]=data.quizlist[i].option3;
+							questionBank[num][4]=data.quizlist[i].option4;
+							questionBank[num][5]=data.quizlist[i].correct; 
+							console.log(questionBank[num]);
+							num++;
+						}
 					}
-				}
-
-				console.log("Displaying all 9 questions and their options next")
-				console.log(questionBank)
-				numberOfQuestions=questionBank.length;		//This would be 9
-				
-				displayQuestion();	
-			})
+	
+					console.log("Displaying all 9 questions and their options next")
+					console.log(questionBank)
+					numberOfQuestions=questionBank.length;		//This would be 9
+					
+					displayQuestion();	
+				})
+			}, 1000)
 		}
 	};
 	xhttp.open("GET","/findSection", true);
@@ -113,6 +126,7 @@ $(document).ready(function () {
 			while(arr.indexOf(n) !== -1)
 			arr[i] = n;
 		}
+		console.log(arr);
 		return arr;
 	}
 	
@@ -202,7 +216,18 @@ $(document).ready(function () {
 				new Promise(resolve => { 
 					setTimeout(function() { 
 						$(stage).append('<div class="questionText">You have finished the quiz!<br><br>Total questions: '+numberOfQuestions+'<br>Correct answers: '+score+'<br>Your current level is '+current_level+'</div><br><br>');
-						$(stage).append('<a href="/dashboard" class="btn btn-light btn-custom-2 mt-4"> Go to my dashboard </a>');
+						if(current_section==="tax") {
+							$(stage).append('<a href="/dashboard?section=tax&level='+current_level+'&score='+score+'" class="btn btn-light btn-custom-2 mt-4"> Go to the Dashboard </a>');
+						}
+						else if(current_section==="investments") {
+							$(stage).append('<a href="/dashboard?section=invest&level='+current_level+'&score='+score+'" class="btn btn-light btn-custom-2 mt-4"> Go to the Dashboard </a>');
+						}
+						else if(current_section==="loans") {
+							$(stage).append('<a href="/dashboard?section=loans&level='+current_level+'&score='+score+'" class="btn btn-light btn-custom-2 mt-4"> Go to the Dashboard </a>');
+						}
+						else {
+							$(stage).append('<a href="/dashboard" class="btn btn-light btn-custom-2 mt-4"> Proceed to Register </a>');
+						}
 						//When a user goes to the dashboard, they should not see the Initiation quiz links for tax and investments
 					}, 2000); 
 				}); 
@@ -211,20 +236,27 @@ $(document).ready(function () {
 
 		xhttp.send();
 
-		//Set cookie only for banking, for the other two we can just set them in the database directly
+		setTimeout(function() {
+			//Setting cookie
+			var d = new Date();
+			d.setTime(d.getTime() + (20*24*60*60*1000));
+			var expires = "expires=" + d.toUTCString();
+			console.log(expires); 
+			document.cookie = "Current Level = " + current_level + ", Score out of 9 = " + score + ", Section = " + current_section + "," + expires; 
 
-		if(current_section==="banking") {
-			setTimeout(function() {
-				//Setting cookie
-				var d = new Date();
-				d.setTime(d.getTime() + (20*24*60*60*1000));
-				var expires = "expires=" + d.toUTCString();
-				console.log(expires); 
-				document.cookie = "Current Level = " + current_level + expires; 
-	
-				console.log(document.cookie);
-				console.log("Current user level is " + current_level);
-			}, 2000);
-		}
+			console.log(document.cookie);
+			console.log("Current user level is " + current_level);
+
+			if(current_section==="banking") {
+				var xhttp_1 = new XMLHttpRequest();
+				xhttp_1.onreadystatechange = function() {
+					if (this.readyState == 4 && this.status == 200) {
+						console.log(this.responseText);
+					}
+				}
+				xhttp_1.open("GET", "/cookiesHandler?cookie="+ document.cookie, true);
+				xhttp_1.send();
+			}
+		}, 2000);
 	}
 });
