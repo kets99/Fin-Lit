@@ -251,7 +251,7 @@ $(document).ready(function () {
 							}
 						}
 						else if(infoBites==="1") {
-							setInterval(showBites, 20000);
+							showBites();
 						}
 					}
 				}
@@ -637,7 +637,7 @@ $(document).ready(function () {
 
 			setTimeout(function() {
 				$(stage).append('<div class="siema"><div class="infoText">'+info+'</div</div>');
-			},1000);
+			},2000);
 		});
 	}
 });
