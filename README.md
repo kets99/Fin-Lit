@@ -96,8 +96,8 @@ Since, our application is a **Progressive Web Application** or **PWA**, you can 
 
 - If you are using the website as a mobile application like we explained before, this is how the application will look like:
 
-![alt text](https://github.com/kets99/Fin-Lit/blob/hints-exp-timer/assets/images/Mobile_5.png) <br>
-
 ![alt text](https://github.com/kets99/Fin-Lit/blob/hints-exp-timer/assets/images/Mobile_6.png) <br>
+
+![alt text](https://github.com/kets99/Fin-Lit/blob/hints-exp-timer/assets/images/Mobile_5.png) <br>
 
 ![alt text](https://github.com/kets99/Fin-Lit/blob/hints-exp-timer/assets/images/Mobile_7.png)
