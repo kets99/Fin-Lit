@@ -107,7 +107,75 @@ $(document).ready(function () {
 			}
 			xhttp_2.open("GET","/sendTaxInvestLoans", true);
 			xhttp_2.send();
-			
+			setTimeout(function () {
+        if (pageTitle === "Profile") {
+          document.getElementById("username").innerHTML =
+            "Username: " + userDetails.username;
+          //BANKING
+          if (userDetails.banking_initiation_level == -1) {
+            document.getElementById("banking_score_initiation").innerHTML =
+              "Not attempted";
+          } else {
+            document.getElementById("banking_score_initiation").innerHTML =
+              userDetails.banking_initiation_level;
+          }
+          if (userDetails.banking_secondary_level == -1) {
+            document.getElementById("banking_score_secondary").innerHTML =
+              "Not attempted";
+          } else {
+            document.getElementById("banking_score_secondary").innerHTML =
+              userDetails.banking_secondary_level;
+          }
+
+          //TAX
+          if (userDetails.tax_initiation_level == -1) {
+            document.getElementById("tax_initiation_level").innerHTML =
+              "Not attempted";
+          } else {
+            document.getElementById("tax_initiation_level").innerHTML =
+              userDetails.tax_initiation_level;
+          }
+          if (userDetails.tax_secondary_level == -1) {
+            document.getElementById("tax_secondary_level").innerHTML =
+              "Not attempted";
+          } else {
+            document.getElementById("tax_secondary_level").innerHTML =
+              userDetails.tax_secondary_level;
+          }
+
+          //INVESTMENT
+          if (userDetails.investments_initiation_level == -1) {
+            document.getElementById("investments_initiation_level").innerHTML =
+              "Not attempted";
+          } else {
+            document.getElementById("investments_initiation_level").innerHTML =
+              userDetails.investments_initiation_level;
+          }
+          if (userDetails.investments_secondary_level == -1) {
+            document.getElementById("investments_secondary_level").innerHTML =
+              "Not attempted";
+          } else {
+            document.getElementById("investments_secondary_level").innerHTML =
+              userDetails.investments_secondary_level;
+          }
+          //LOANS
+          if (userDetails.loans_initiation_level == -1) {
+            document.getElementById("loans_initiation_level").innerHTML =
+              "Not attempted";
+          } else {
+            document.getElementById("loans_initiation_level").innerHTML =
+              userDetails.loans_initiation_level;
+          }
+          if (userDetails.loans_secondary_level == -1) {
+            document.getElementById("loans_secondary_level").innerHTML =
+              "Not attempted";
+          } else {
+            document.getElementById("loans_secondary_level").innerHTML =
+              userDetails.loans_secondary_level;
+          }
+
+        }
+      }, 70);
 			setTimeout(function() { 
 				if(pageTitle==="Dashboard") {
 					if(userDetails.tax_initiation_level==-1) {
