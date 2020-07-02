@@ -116,97 +116,125 @@ router.get("/dashboard", (req, res) => {
     console.log(username);
 
     //If they just attempted an initiation for either Tax or Investments
-    if(req.query.section==="tax") {
+    if (req.query.section === "tax") {
       tax_init_level = req.query.level;
       tax_init_score = req.query.score;
       tax_set = true;
       updatedUserDetails["tax_initiation_level"] = tax_init_level;
       updatedUserDetails["tax_initiation_score"] = tax_init_score;
-      MongoClient.connect(uri, { useUnifiedTopology: true, },(err, client) => {
+      MongoClient.connect(uri, { useUnifiedTopology: true }, (err, client) => {
         const db = client.db("Finlit");
         const collection = db.collection("User");
-        db.collection("User").findOneAndUpdate({ username: userDetails["username"] },
-          {"$set": { tax_initiation_level: updatedUserDetails["tax_initiation_level"],
-                      tax_initiation_score: updatedUserDetails["tax_initiation_score"],}},
+        db.collection("User").findOneAndUpdate(
+          { username: userDetails["username"] },
+          {
+            $set: {
+              tax_initiation_level: updatedUserDetails["tax_initiation_level"],
+              tax_initiation_score: updatedUserDetails["tax_initiation_score"],
+            },
+          },
           function (err, user) {
-            if(err) {
-              console.log("Error "+err);
+            if (err) {
+              console.log("Error " + err);
             }
-          })
-        });
-        userDetails = updatedUserDetails;
-    } else if(req.query.section==="invest") {
+          }
+        );
+      });
+      userDetails = updatedUserDetails;
+    } else if (req.query.section === "invest") {
       invest_init_level = req.query.level;
       invest_init_score = req.query.score;
       invest_set = true;
       updatedUserDetails["investments_initiation_level"] = invest_init_level;
       updatedUserDetails["investments_initiation_score"] = invest_init_score;
-      MongoClient.connect(uri, { useUnifiedTopology: true, },(err, client) => {
+      MongoClient.connect(uri, { useUnifiedTopology: true }, (err, client) => {
         const db = client.db("Finlit");
         const collection = db.collection("User");
-        db.collection("User").findOneAndUpdate({ username: userDetails["username"] },
-          {"$set": { investments_initiation_level: updatedUserDetails["investments_initiation_level"],
-                      investments_initiation_score: updatedUserDetails["investments_initiation_score"],}},
+        db.collection("User").findOneAndUpdate(
+          { username: userDetails["username"] },
+          {
+            $set: {
+              investments_initiation_level:
+                updatedUserDetails["investments_initiation_level"],
+              investments_initiation_score:
+                updatedUserDetails["investments_initiation_score"],
+            },
+          },
           function (err, user) {
-            if(err) {
-              console.log("Error "+err);
+            if (err) {
+              console.log("Error " + err);
             }
-          })
-        });
-        userDetails = updatedUserDetails;
-    } else if(req.query.section==="loans") {
+          }
+        );
+      });
+      userDetails = updatedUserDetails;
+    } else if (req.query.section === "loans") {
       loans_init_level = req.query.level;
       loans_init_score = req.query.score;
       loans_set = true;
       updatedUserDetails["loans_initiation_level"] = loans_init_level;
       updatedUserDetails["loans_initiation_score"] = loans_init_score;
-      MongoClient.connect(uri, { useUnifiedTopology: true, },(err, client) => {
+      MongoClient.connect(uri, { useUnifiedTopology: true }, (err, client) => {
         const db = client.db("Finlit");
         const collection = db.collection("User");
-        db.collection("User").findOneAndUpdate({ username: userDetails["username"] },
-          {"$set": { loans_initiation_level: updatedUserDetails["loans_initiation_level"],
-                      loans_initiation_score: updatedUserDetails["loans_initiation_score"],}},
+        db.collection("User").findOneAndUpdate(
+          { username: userDetails["username"] },
+          {
+            $set: {
+              loans_initiation_level:
+                updatedUserDetails["loans_initiation_level"],
+              loans_initiation_score:
+                updatedUserDetails["loans_initiation_score"],
+            },
+          },
           function (err, user) {
-            if(err) {
-              console.log("Error "+err);
+            if (err) {
+              console.log("Error " + err);
             }
-          })
-        });
-        userDetails = updatedUserDetails;
-    } else {}
+          }
+        );
+      });
+      userDetails = updatedUserDetails;
+    } else {
+    }
     res.render("dashboard", { layout: "dashboard.handlebars" });
   }
 });
 
 //Send tax and/or investment results
 router.get("/sendTaxInvestLoans", (req, res) => {
-  if(tax_set==true || invest_set==true || loans_set==true) {
-    res.json({ 
-      tax_set : tax_set,
-      tax_init_level : tax_init_level,
-      tax_init_score : tax_init_score,
-      invest_set : invest_set,
-      invest_init_level : invest_init_level,
-      invest_init_score : invest_init_score,
-      loans_init_level : loans_init_level,
-      laons_init_score : loans_init_score   
+  if (tax_set == true || invest_set == true || loans_set == true) {
+    res.json({
+      tax_set: tax_set,
+      tax_init_level: tax_init_level,
+      tax_init_score: tax_init_score,
+      invest_set: invest_set,
+      invest_init_level: invest_init_level,
+      invest_init_score: invest_init_score,
+      loans_init_level: loans_init_level,
+      laons_init_score: loans_init_score,
     });
   }
 });
 
 //Update user progress
-router.get("/updateUserProgress", (req,res) => {
-  updatedUserDetails["banking_secondary_level"] = req.query.banking_secondary_level;
-  updatedUserDetails["banking_secondary_score"] = req.query.banking_secondary_score;
+router.get("/updateUserProgress", (req, res) => {
+  updatedUserDetails["banking_secondary_level"] =
+    req.query.banking_secondary_level;
+  updatedUserDetails["banking_secondary_score"] =
+    req.query.banking_secondary_score;
   updatedUserDetails["tax_secondary_level"] = req.query.tax_secondary_level;
   updatedUserDetails["tax_secondary_score"] = req.query.tax_secondary_score;
-  updatedUserDetails["investments_secondary_level"] = req.query.investments_secondary_level;
-  updatedUserDetails["investments_secondary_score"] = req.query.investments_secondary_score;
+  updatedUserDetails["investments_secondary_level"] =
+    req.query.investments_secondary_level;
+  updatedUserDetails["investments_secondary_score"] =
+    req.query.investments_secondary_score;
   updatedUserDetails["loans_secondary_level"] = req.query.loans_secondary_level;
   updatedUserDetails["loans_secondary_score"] = req.query.loans_secondary_score;
   updatedUserDetails["banking_quiz_entry"] = req.query.banking_quiz_entry;
   updatedUserDetails["tax_quiz_entry"] = req.query.tax_quiz_entry;
-  updatedUserDetails["investments_quiz_entry"] = req.query.investments_quiz_entry;
+  updatedUserDetails["investments_quiz_entry"] =
+    req.query.investments_quiz_entry;
   updatedUserDetails["loans_quiz_entry"] = req.query.loans_quiz_entry;
   updatedUserDetails["banking_qno"] = req.query.banking_qno;
   updatedUserDetails["tax_qno"] = req.query.tax_qno;
@@ -224,36 +252,46 @@ router.get("/updateUserProgress", (req,res) => {
     (err, client) => {
       const db = client.db("Finlit");
       const collection = db.collection("User");
-      db.collection("User").findOneAndUpdate({ username: userDetails["username"] },
-        {"$set": { banking_secondary_level: updatedUserDetails["banking_secondary_level"],
-                   banking_secondary_score: updatedUserDetails["banking_secondary_score"],
-                   tax_secondary_level: updatedUserDetails["tax_secondary_level"],
-                   tax_secondary_score: updatedUserDetails["tax_secondary_score"],
-                   investments_secondary_level: updatedUserDetails["investments_secondary_level"],
-                   investments_secondary_score: updatedUserDetails["investments_secondary_score"],
-                   loans_secondary_level: updatedUserDetails["loans_secondary_level"],
-                   loans_secondary_score: updatedUserDetails["loans_secondary_score"],
-                   banking_quiz_entry: updatedUserDetails["banking_quiz_entry"],
-                   tax_quiz_entry: updatedUserDetails["tax_quiz_entry"],
-                   investments_quiz_entry: updatedUserDetails["investments_quiz_entry"],
-                   loans_quiz_entry: updatedUserDetails["loans_quiz_entry"],
-                   banking_qno: updatedUserDetails["banking_qno"],
-                   tax_qno: updatedUserDetails["tax_qno"],
-                   investments_qno: updatedUserDetails["investments_qno"],
-                   loans_qno: updatedUserDetails["loans_qno"]
-                  }},
-        function (err, user ) {
-          if(err) {
-            console.log("Error "+err);
+      db.collection("User").findOneAndUpdate(
+        { username: userDetails["username"] },
+        {
+          $set: {
+            banking_secondary_level:
+              updatedUserDetails["banking_secondary_level"],
+            banking_secondary_score:
+              updatedUserDetails["banking_secondary_score"],
+            tax_secondary_level: updatedUserDetails["tax_secondary_level"],
+            tax_secondary_score: updatedUserDetails["tax_secondary_score"],
+            investments_secondary_level:
+              updatedUserDetails["investments_secondary_level"],
+            investments_secondary_score:
+              updatedUserDetails["investments_secondary_score"],
+            loans_secondary_level: updatedUserDetails["loans_secondary_level"],
+            loans_secondary_score: updatedUserDetails["loans_secondary_score"],
+            banking_quiz_entry: updatedUserDetails["banking_quiz_entry"],
+            tax_quiz_entry: updatedUserDetails["tax_quiz_entry"],
+            investments_quiz_entry:
+              updatedUserDetails["investments_quiz_entry"],
+            loans_quiz_entry: updatedUserDetails["loans_quiz_entry"],
+            banking_qno: updatedUserDetails["banking_qno"],
+            tax_qno: updatedUserDetails["tax_qno"],
+            investments_qno: updatedUserDetails["investments_qno"],
+            loans_qno: updatedUserDetails["loans_qno"],
+          },
+        },
+        function (err, user) {
+          if (err) {
+            console.log("Error " + err);
           }
           console.log("User found");
-        })
-      });
+        }
+      );
+    }
+  );
 
-    res.send("Got updated details");
-    console.log(userDetails);
+  res.send("Got updated details");
+  console.log(userDetails);
 });
-
 
 router.get("/logout", (req, res) => {
   username = "";
@@ -268,24 +306,25 @@ router.get("/second_quiz", (req, res) => {
   console.log(req.query.section);
   res.render("second_quiz", { layout: "second_quiz.handlebars" });
   section = req.query.section;
-  if(req.query.info==="yes") {
+  if (req.query.info === "yes") {
     console.log("Yep");
     infoBites = 1;
+  } else {
+    infoBites = 0;
   }
-  else { infoBites = 0;}
 });
 
 //Fetch Section/Domain
 router.get("/findSection", (req, res) => {
-  res.send(section+" "+infoBites);
+  res.send(section + " " + infoBites);
 });
 
 //Retrieving cookie
 router.get("/cookiesHandler", (req, res) => {
   var cookie = req.query.cookie;
   var cookie_arr = cookie.split("expires=");
-  bank_init_level = (((cookie_arr[0].split("="))[1]).split(","))[0];
-  bank_init_score = ((cookie_arr[0].split("="))[2]).split(",")[0];
+  bank_init_level = cookie_arr[0].split("=")[1].split(",")[0];
+  bank_init_score = cookie_arr[0].split("=")[2].split(",")[0];
   console.log("Cookie retrieved at handler");
   console.log(bank_init_level);
   console.log(bank_init_score);
@@ -300,6 +339,15 @@ router.get("/ifLoggedIn", (req, res) => {
 router.get("/basics", (req, res) => {
   console.log("here?");
   res.render("basics", { layout: "basics.handlebars" });
+});
+
+router.get("/profile", (req, res) => {
+  if (login == "") {
+    res.redirect("/login");
+  } else {
+    console.log(username);
+    res.render("profile", { layout: "profile.handlebars" });
+  }
 });
 
 // Function callName() is executed whenever
@@ -373,7 +421,7 @@ router.get("/reg", (req, res) => {
         banking_qno: 0,
         tax_qno: 0,
         investments_qno: 0,
-        loans_qno: 0
+        loans_qno: 0,
       };
 
       userDetails = myobj;
@@ -416,7 +464,10 @@ router.get("/log", (req, res) => {
           console.log("THIS IS ERROR RESPONSE");
           res.json(err);
         }
-        if (user.password === req.query.password) {
+        if (user == null) {
+          console.log("Credentials wrong");
+          res.redirect("/login");
+        } else if (user.password === req.query.password) {
           console.log("User and password is correct");
           login = true;
           username = req.query.username;
