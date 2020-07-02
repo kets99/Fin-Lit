@@ -105,7 +105,7 @@ $(document).ready(function () {
 					console.log(userDetails.loans_initiation_level);
 				}
 			}
-			xhttp_2.open("GET","/sendTaxInvest", true);
+			xhttp_2.open("GET","/sendTaxInvestLoans", true);
 			xhttp_2.send();
 			
 			setTimeout(function() { 
@@ -175,7 +175,7 @@ $(document).ready(function () {
 							}
 						}
 						else if(infoBites==="1") {
-							setInterval(showBites, 20000);
+							showBites();
 						}
 					}
 					else if(current_section==="tax") {
@@ -200,7 +200,7 @@ $(document).ready(function () {
 							}
 						}
 						else if(infoBites==="1") {
-							setInterval(showBites, 20000);
+							showBites();
 						}
 					}
 					else if(current_section==="investments") {
@@ -225,7 +225,7 @@ $(document).ready(function () {
 							}
 						}
 						else if(infoBites==="1") {
-							setInterval(showBites, 20000);
+							showBites();
 						}
 					}
 
@@ -603,6 +603,7 @@ $(document).ready(function () {
 		$(stage).children("div").remove();
 		$(stage).children("a").remove();
 		$(stage).children("br").remove();
+
 		console.log(sbeg);
 		console.log(eep);
 		var n = Math.floor(Math.random() * (eep - sbeg + 1)) + sbeg;
@@ -615,10 +616,28 @@ $(document).ready(function () {
 		console.log(info);
 
 		setTimeout(function() {
-			$(stage).append('<div class="infoText">'+info+'</div><br>');
-			$(stage).append('<a href="/dashboard" class="btn btn-light btn-custom-2 mt-4"> Go back to Dashboard </a><br><br>');
-
-			$(stage).append('<div class="infoText"> The slides will change in 20 seconds, take your time to read! </div><br>');
+			$(stage).append('<br><div class="infoText">'+info+'</div>');
 		},1000);
+
+		$(stage).append('<a href="/dashboard" class="btn btn-light btn-custom-2 mt-4">Return to Dashboard</a><br><br>');
+		$(stage).append('<button id="nextButton" class="btn btn-light btn-custom-2 mt-4">Show Next Bite</button><br><br>');
+
+		$("#nextButton").button().click(function() {
+			$(stage).children("div").remove();
+			console.log(sbeg);
+			console.log(eep);
+			var n = Math.floor(Math.random() * (eep - sbeg + 1)) + sbeg;
+			console.log(n);
+			var info;
+
+			$.getJSON('activity.json', function(data) {
+				info = data.quizlist[n-1].explanation;
+			})
+			console.log(info);
+
+			setTimeout(function() {
+				$(stage).append('<div class="siema"><div class="infoText">'+info+'</div</div>');
+			},1000);
+		});
 	}
 });
